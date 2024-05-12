@@ -8,16 +8,12 @@ public class Box {
     double height;
 
     Point UpperLeft;
-    Point BottomLeft;
-    Point UpperRight;
     Point BottomRight;
 
-    public Box(double width, double height, Point upperLeft, Point bottomLeft, Point upperRight, Point bottomRight) {
+    public Box(double width, double height, Point upperLeft, Point bottomRight) {
         this.width = width;
         this.height = height;
         UpperLeft = upperLeft;
-        BottomLeft = bottomLeft;
-        UpperRight = upperRight;
         BottomRight = bottomRight;
     }
 
@@ -60,21 +56,6 @@ public class Box {
         UpperLeft = upperLeft;
     }
 
-    public Point getBottomLeft() {
-        return BottomLeft;
-    }
-
-    public void setBottomLeft(Point bottomLeft) {
-        BottomLeft = bottomLeft;
-    }
-
-    public Point getUpperRight() {
-        return UpperRight;
-    }
-
-    public void setUpperRight(Point upperRight) {
-        UpperRight = upperRight;
-    }
 
     public Point getBottomRight() {
         return BottomRight;
@@ -82,5 +63,15 @@ public class Box {
 
     public void setBottomRight(Point bottomRight) {
         BottomRight = bottomRight;
+    }
+
+    @Override
+    public String toString() {
+        return "Box{" +
+                "width=" + width +
+                ", height=" + height +
+                ", UpperLeft=" + UpperLeft +
+                ", BottomRight=" + BottomRight +
+                '}';
     }
 }
