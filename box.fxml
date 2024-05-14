@@ -22,7 +22,6 @@
          </buttons>
       </ButtonBar>
       <Label layoutX="673.0" layoutY="18.0" prefHeight="18.0" prefWidth="40.0" text="Circle" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="GREY" height="250.0" layoutX="250.0" layoutY="176.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bcbcbc" height="225.0" layoutX="275.0" layoutY="176.0" stroke="BLACK" strokeType="INSIDE" width="350.0" />
    </children>
 </AnchorPane>

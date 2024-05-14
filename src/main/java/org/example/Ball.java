@@ -1,20 +1,19 @@
 package org.example;
 
 import java.awt.*;
+import javafx.scene.shape.Circle;
 
 
 public class Ball {
     double radius;
     Color color;
-
+    Circle circle;
     Point center;
-
-
 
     public Ball(double radius, Color color, Point XY) {
         this.radius = radius;
         this.color = color;
-        this.center = XY;
+        this.circle = new Circle(center.getX(), center.getY(), radius);
     }
 
 
@@ -62,6 +61,8 @@ public class Ball {
 
     public void setRadius(double radius) {
         this.radius = radius;
+        circle.setRadius(radius);
+
     }
 
     public void setColor(Color color) {
@@ -69,7 +70,11 @@ public class Ball {
     }
 
     public void setCenter(Point center) {
-        this.center = center;
+        circle.setCenterX(center.getX());
+        circle.setCenterY(center.getY());    }
+
+    public Circle getCircle() {
+        return circle;
     }
 
     @Override

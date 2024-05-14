@@ -20,8 +20,8 @@ public class CollisionManager {
          * check if the ball is inside the box
          */
 
-        if (ball.getCenter().x >= box.getUpperLeft().x + ball.getRadius() && ball.getCenter().x <= box.getBottomRight().y - ball.getRadius()
-                && ball.getCenter().y >= box.getUpperLeft().y + ball.getRadius() && ball.getCenter().x <= box.getBottomRight().y - ball.getRadius()) {
+        if (ball.getCenter().x >= box.getUpperLeft().x + ball.getRadius() && ball.getCenter().x <= box.getBottomRight().x - ball.getRadius()
+                && ball.getCenter().y >= box.getUpperLeft().y + ball.getRadius() && ball.getCenter().y <= box.getBottomRight().y - ball.getRadius()) {
             return false;
         }
         /**
