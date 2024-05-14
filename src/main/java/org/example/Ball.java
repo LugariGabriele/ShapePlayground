@@ -1,19 +1,22 @@
 package org.example;
+import javafx.scene.paint.*;
 
 import java.awt.*;
-import javafx.scene.shape.Circle;
 
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
+import java.awt.geom.Ellipse2D;
 
 public class Ball {
     double radius;
-    Color color;
+    Paint color;
     Circle circle;
     Point center;
 
-    public Ball(double radius, Color color, Point XY) {
+    public Ball(double radius, Paint color, Point center) {
         this.radius = radius;
-        this.color = color;
-        this.circle = new Circle(center.getX(), center.getY(), radius);
+        this.center=center;
+        this.circle = new Circle(center.getX(), center.getY(), radius,color);
     }
 
 
@@ -51,7 +54,7 @@ public class Ball {
         return radius;
     }
 
-    public Color getColor() {
+    public Paint getColor() {
         return color;
     }
 
@@ -65,7 +68,7 @@ public class Ball {
 
     }
 
-    public void setColor(Color color) {
+    public void setColor(Paint color) {
         this.color = color;
     }
 

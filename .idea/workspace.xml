@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="create Mouseevent on the controller and the initalize the buttonAdd">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/box.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/box.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/GameApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/GameApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/GameController.java" afterDir="false" />
-    </list>
+    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="add delete button" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,7 +99,7 @@
       <workItem from="1715447419277" duration="69000" />
       <workItem from="1715518673441" duration="4699000" />
       <workItem from="1715678767963" duration="7888000" />
-      <workItem from="1715695716902" duration="1591000" />
+      <workItem from="1715695716902" duration="1625000" />
     </task>
     <task id="LOCAL-00001" summary="created project">
       <option name="closed" value="true" />
@@ -162,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715686597416</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="add delete button">
+      <option name="closed" value="true" />
+      <created>1715697331008</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1715697331009</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,6 +178,7 @@
     <MESSAGE value="little change and the collision BoxBox" />
     <MESSAGE value="little change and create CollisionManager class" />
     <MESSAGE value="create Mouseevent on the controller and the initalize the buttonAdd" />
-    <option name="LAST_COMMIT_MESSAGE" value="create Mouseevent on the controller and the initalize the buttonAdd" />
+    <MESSAGE value="add delete button" />
+    <option name="LAST_COMMIT_MESSAGE" value="add delete button" />
   </component>
 </project>

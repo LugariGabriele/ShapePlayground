@@ -7,7 +7,9 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import org.example.Ball;
+import javafx.scene.paint.*;
 
 import java.awt.*;
 import java.io.IOException;
@@ -20,7 +22,7 @@ public class GameController {
     private Button deleteButton;
     private Ball newBall;
     private List<Ball> balls;
-
+    private boolean deleteButtonMode= false;
     private Group root;
 
     /**
@@ -30,19 +32,26 @@ public class GameController {
     private void initializeAddButtons() {
         addButton.setOnAction(event -> {
             Point center = new Point(70, 551);
-            newBall = new Ball(20, Color.blue, center);
+            newBall = new Ball(20, Color.BLUE, center);
             balls.add(newBall);
             root.getChildren().add(newBall.getCircle());
             System.out.println("New ball created: " + newBall);
         });
+        root.getChildren().add(addButton);
+
         deleteButton.setOnAction(actionEvent -> deleteSelectedBall());
+        root.getChildren().add(deleteButton);
     }
     private void deleteSelectedBall(){
-        for (Ball ball:balls){
-            ball.getCircle().setOnMouseEntered(mouseEvent -> ball.getCircle().setFill(Color.RED)); // se entra mouse diventa rossa
-            ball.getCircle().setOnMouseExited(mouseEvent -> ball.getCircle().setFill(Color.BLUE)); // se esce torna colore normale
-            ball.getCircle().setOnMouseClicked(mouseEvent -> root.getChildren().remove(ball.getCircle())); // cancella dalla scena
-            balls.remove(ball); // rimuove dall' elenco
+        deleteButtonMode=!deleteButtonMode; //cambia tipo per ON e OFF
+        if (deleteButtonMode) {
+            System.out.println("Delete Mode ON");
+            for (Ball ball : balls) {
+                ball.getCircle().setOnMouseEntered(mouseEvent -> ball.getCircle().setFill(Color.RED)); // se entra mouse diventa rossa
+                ball.getCircle().setOnMouseExited(mouseEvent -> ball.getCircle().setFill(Color.BLUE)); // se esce torna colore normale
+                ball.getCircle().setOnMouseClicked(mouseEvent -> root.getChildren().remove(ball.getCircle())); // cancella dalla scena
+                balls.remove(ball); // rimuove dall' elenco
+            }
         }
 
     }
