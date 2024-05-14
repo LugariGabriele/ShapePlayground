@@ -12,7 +12,7 @@ public class GameApplication extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("box.fxml"));
         Scene scene = new Scene(root);
-        stage.setTitle("Address Application");
+        stage.setTitle("Game Application");
         stage.setScene(scene);
         stage.show();
     }

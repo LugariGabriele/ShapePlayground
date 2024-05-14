@@ -10,7 +10,6 @@ import javafx.scene.layout.AnchorPane;
 import org.example.Ball;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,10 +17,10 @@ import java.util.List;
 public class GameController {
 
     private Button addButton;
+    private Button deleteButton;
     private Ball newBall;
     private List<Ball> balls;
 
-    private Button deleteButton;
     private Group root;
 
     /**
@@ -36,6 +35,16 @@ public class GameController {
             root.getChildren().add(newBall.getCircle());
             System.out.println("New ball created: " + newBall);
         });
+        deleteButton.setOnAction(actionEvent -> deleteSelectedBall());
+    }
+    private void deleteSelectedBall(){
+        for (Ball ball:balls){
+            ball.getCircle().setOnMouseEntered(mouseEvent -> ball.getCircle().setFill(Color.RED)); // se entra mouse diventa rossa
+            ball.getCircle().setOnMouseExited(mouseEvent -> ball.getCircle().setFill(Color.BLUE)); // se esce torna colore normale
+            ball.getCircle().setOnMouseClicked(mouseEvent -> root.getChildren().remove(ball.getCircle())); // cancella dalla scena
+            balls.remove(ball); // rimuove dall' elenco
+        }
+
     }
 
     private void ballController() {
@@ -50,8 +59,9 @@ public class GameController {
             e.printStackTrace();
 
         }
-        Button addButton = (Button) root.lookup("#addButton");
-        addButton.setOnAction(event -> initializeAddButtons());
+
+        // Button addButton = (Button) root.lookup("#addButton");
+        // addButton.setOnAction(event -> initializeAddButtons());
 
         scene.setOnMousePressed(this::onMousePressed);
         scene.setOnMouseDragged(this::onMouseDragged);
@@ -71,7 +81,7 @@ public class GameController {
                         lastUpdate = now;
                         return;
                     }
-                    // compute the time frome the last update in milliseconds
+                    // compute the time from the last update
                     double elapsedTime = (now - lastUpdate) / 1e9;
 
                     // compute the new position of the ball
@@ -83,7 +93,7 @@ public class GameController {
                         stop(); //stop the fall animation
                     }
                     newBall.getCircle().setCenterY(newY);
-                    lastUpdate=now;
+                    lastUpdate = now;
                 }
             }.start();
         }
@@ -106,15 +116,6 @@ public class GameController {
             }
         }
         newBall = null;
-    }
-
-    private void onMouseReleased(MouseEvent event) {
-        if (newBall != null) {
-            //set fall speed and direction
-            double fallSpeed = 5;
-            int direction = 1; // 1 for the bottom fall
-            newBall.getCircle().setCenterY(newBall.getCircle().getCenterY() + fallSpeed * direction);
-        }
     }
 
     public Scene getScene() {
