@@ -1,11 +1,9 @@
-package org.example;
-import javafx.scene.paint.*;
+package game.item;
 
 import java.awt.*;
 
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import java.awt.geom.Ellipse2D;
 
 public class Ball {
     double radius;

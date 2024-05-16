@@ -1,4 +1,4 @@
-package org.example;
+package game.item;
 
 public class CollisionManager {
     /**

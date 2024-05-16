@@ -1,4 +1,4 @@
-package gui;
+package game.gui;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
@@ -8,22 +8,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import org.example.Ball;
-import javafx.scene.paint.*;
-
+import game.item.Ball;
 import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
-
 public class GameController {
 
-    private Button addButton;
-    private Button deleteButton;
-    private Ball newBall;
-    private List<Ball> balls;
-    private boolean deleteButtonMode= false;
-    private Group root;
+    public Button addButton;
+    public Button deleteButton;
+    public Ball newBall;
+    public List<Ball> balls;
+    public boolean deleteButtonMode = false;
+    public Group root;
 
     /**
      * initialize the action of add button
@@ -42,8 +39,10 @@ public class GameController {
         deleteButton.setOnAction(actionEvent -> deleteSelectedBall());
         root.getChildren().add(deleteButton);
     }
-    private void deleteSelectedBall(){
-        deleteButtonMode=!deleteButtonMode; //cambia tipo per ON e OFF
+
+    @FXML
+    private void deleteSelectedBall() {
+        deleteButtonMode = !deleteButtonMode; //cambia tipo per ON e OFF
         if (deleteButtonMode) {
             System.out.println("Delete Mode ON");
             for (Ball ball : balls) {
@@ -53,34 +52,20 @@ public class GameController {
                 balls.remove(ball); // rimuove dall' elenco
             }
         }
-
     }
 
-    private void ballController() {
-        root = new Group();
-        Scene scene = new Scene(root, 800, 600);
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("box.fxml"));
-        try {
-            AnchorPane boxPane = loader.load();
-            root.getChildren().add(boxPane);
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        }
-
-        // Button addButton = (Button) root.lookup("#addButton");
-        // addButton.setOnAction(event -> initializeAddButtons());
-
+    @FXML
+    public void mouseController(Scene scene) {
+        // imposto le azioni del mouse sulla scena
         scene.setOnMousePressed(this::onMousePressed);
         scene.setOnMouseDragged(this::onMouseDragged);
         scene.setOnMouseReleased(this::onMouseReleased);
     }
 
+    @FXML
     private void onMouseReleased(javafx.scene.input.MouseEvent event) {
         if (newBall != null) {
             double fallSpeed = 5;
-
             new AnimationTimer() {
                 private long lastUpdate = 0;
 
@@ -96,7 +81,7 @@ public class GameController {
                     // compute the new position of the ball
                     double newY = newBall.getCircle().getCenterY() + fallSpeed * elapsedTime;
 
-                    //check if the ball reach the ned of the scene
+                    //check if the ball reach the end of the scene
                     if (newY >= root.getScene().getHeight() - newBall.getRadius()) {
                         newY = root.getScene().getHeight() - newBall.getRadius();
                         stop(); //stop the fall animation
@@ -108,8 +93,8 @@ public class GameController {
         }
     }
 
-    ;
 
+    @FXML
     private void onMouseDragged(javafx.scene.input.MouseEvent event) {
         if (newBall != null) {
             newBall.getCircle().setCenterX(event.getSceneX());
@@ -117,6 +102,7 @@ public class GameController {
         }
     }
 
+    @FXML
     private void onMousePressed(javafx.scene.input.MouseEvent event) {
         for (Ball ball : balls) {
             if (ball.getCircle().contains(event.getX(), event.getY())) {
@@ -127,6 +113,7 @@ public class GameController {
         newBall = null;
     }
 
+    @FXML
     public Scene getScene() {
         return root.getScene();
     }
