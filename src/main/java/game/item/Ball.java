@@ -5,7 +5,7 @@ import java.awt.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
-public class Ball {
+public class Ball extends Circle{
     double radius;
     Paint color;
     Circle circle;
@@ -48,9 +48,7 @@ public class Ball {
         return Math.PI * this.radius * this.radius;
     }
 
-    public double getRadius() {
-        return radius;
-    }
+
 
     public Paint getColor() {
         return color;
@@ -60,11 +58,7 @@ public class Ball {
         return center;
     }
 
-    public void setRadius(double radius) {
-        this.radius = radius;
-        circle.setRadius(radius);
 
-    }
 
     public void setColor(Paint color) {
         this.color = color;

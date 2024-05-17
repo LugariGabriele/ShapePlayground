@@ -1,5 +1,7 @@
 package game.item;
 
+import java.awt.*;
+
 public class CollisionManager {
     /**
      * if the sum of the 2 radius(the minimum value for not colliding)
