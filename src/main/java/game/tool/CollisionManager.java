@@ -1,6 +1,5 @@
-package game.item;
+package game.tool;
 
-import java.awt.*;
 
 public class CollisionManager {
     /**
@@ -18,26 +17,33 @@ public class CollisionManager {
     }
 
     public static boolean CollisionInsideBallBox(Ball ball, Box box) {
-        /**
+
+        /*
          * check if the ball is inside the box
          */
-
         if (ball.getCenter().x >= box.getUpperLeft().x + ball.getRadius() && ball.getCenter().x <= box.getBottomRight().x - ball.getRadius()
                 && ball.getCenter().y >= box.getUpperLeft().y + ball.getRadius() && ball.getCenter().y <= box.getBottomRight().y - ball.getRadius()) {
             return false;
         }
-        /**
+
+        /*
          * find coordinates of the nearest position of the circle inside the box
          */
+        double ballX = ball.getCenter().getX();
+        double ballY = ball.getCenter().getY();
+        double ballRadius = ball.getRadius();
 
-        double nearestPointX = Math.max(box.getUpperLeft().x, Math.min(ball.getCenter().x, box.getBottomRight().x));
-        double nearestPointY = Math.max(box.getUpperLeft().y, Math.min(ball.getCenter().y, box.getBottomRight().y));
-        // find the distance between the ball center and the nearest point
-        double distanceX = ball.getCenter().x - nearestPointX;
-        double distanceY = ball.getCenter().y - nearestPointY;
+        double boxLeft = box.getUpperLeft().getX();
+        double boxRight = box.getBottomRight().getX();
+        double boxTop = box.getUpperLeft().getY();
+        double boxBottom = box.getBottomRight().getY();
 
-        return Math.pow(distanceX, 2) + Math.pow(distanceY, 2) <= Math.pow(ball.radius, 2);
+        boolean insideHorizontally = ballX - ballRadius >= boxLeft && ballX + ballRadius <= boxRight;
+        boolean insideVertically = ballY - ballRadius >= boxTop && ballY + ballRadius <= boxBottom;
+
+        return insideHorizontally && insideVertically;
     }
-
-
 }
+
+
+

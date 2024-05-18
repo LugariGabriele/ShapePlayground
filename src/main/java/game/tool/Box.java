@@ -1,4 +1,4 @@
-package game.item;
+package game.tool;
 
 import java.awt.*;
 import javafx.scene.shape.Rectangle;

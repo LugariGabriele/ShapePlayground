@@ -4,18 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="modified ballcontroller in mousecontroller but ADD some bugs :)">
-      <change afterPath="$PROJECT_DIR$/src/main/java/game/logic/LogicGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/game/gui/box1.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/game/gui/styles.css" afterDir="false" />
+    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="fix everything and link controller fxml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/GameApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/item/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/item/Box.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/item/CollisionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/item/CollisionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/box.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/item/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/item/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tool/Box.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/item/CollisionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tool/CollisionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/logic/LogicGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/logic/LogicGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +162,8 @@
       <workItem from="1715862642336" duration="223000" />
       <workItem from="1715862936868" duration="1547000" />
       <workItem from="1715948317509" duration="9189000" />
-      <workItem from="1715971735381" duration="4293000" />
+      <workItem from="1715971735381" duration="5058000" />
+      <workItem from="1716019787301" duration="10539000" />
     </task>
     <task id="LOCAL-00001" summary="created project">
       <option name="closed" value="true" />
@@ -249,7 +245,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715864479944</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fix everything and link controller fxml">
+      <option name="closed" value="true" />
+      <created>1715976148633</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1715976148633</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -276,6 +280,7 @@
     <MESSAGE value="add delete button" />
     <MESSAGE value="Fix color problem and create control delete button" />
     <MESSAGE value="modified ballcontroller in mousecontroller but ADD some bugs :)" />
-    <option name="LAST_COMMIT_MESSAGE" value="modified ballcontroller in mousecontroller but ADD some bugs :)" />
+    <MESSAGE value="fix everything and link controller fxml" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix everything and link controller fxml" />
   </component>
 </project>
