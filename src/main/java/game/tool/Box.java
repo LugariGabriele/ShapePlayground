@@ -1,6 +1,8 @@
 package game.tool;
 
 import java.awt.*;
+
+import javafx.scene.Node;
 import javafx.scene.shape.Rectangle;
 public class Box extends Rectangle {
 
@@ -66,4 +68,6 @@ public class Box extends Rectangle {
                 ", BottomRight=" + BottomRight +
                 '}';
     }
+
+
 }

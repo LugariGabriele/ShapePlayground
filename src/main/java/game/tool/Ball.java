@@ -1,17 +1,18 @@
 package game.tool;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
 import java.awt.*;
-import java.util.function.Consumer;
 
-public class Ball extends Circle  {
+
+public class Ball extends Circle {
     double radius;
     Paint color;
     Circle circle;
     Point center;
-
 
 
     public Ball(double radius, Paint color, Point center) {
@@ -41,7 +42,7 @@ public class Ball extends Circle  {
     }
 
     /**
-     * @return the area of the org.example.Ball
+     * @return the area of the ball
      */
     public double getArea() {
 
@@ -69,6 +70,7 @@ public class Ball extends Circle  {
     public Circle getCircle() {
         return circle;
     }
+
 
     @Override
     public String toString() {
