@@ -145,4 +145,3 @@ public class GameController {
         newBall = null;
     }
 }
-git config --global diecimaikol@gmail.com
