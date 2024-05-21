@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class GameController {
     @FXML
     public Ball newBall;
     @FXML
-    public Box table;
+    public javafx.scene.shape.Rectangle table;
     @FXML
     public List<Ball> balls = new ArrayList<>();
     @FXML
@@ -34,7 +35,7 @@ public class GameController {
     @FXML
     private List<LogicGame> logic = new ArrayList<>();
 
-    public void initialize(){
+    public void initialize() {
         /*
         In a few words: The constructor is called first, then any @FXML annotated fields are populated, then initialize() is called.
 
@@ -43,22 +44,22 @@ public class GameController {
 
         initializeAddButton();
         initializeDeleteButton();
-       // initializeTable();
+        initializeTable();
     }
-    /*@FXML
+
+    @FXML
     public void initializeTable() {
         // Create a Box instance and add it to the AnchorPane (example positioning)
-        Point upperLeft = new Point(0, 370);
-        Point bottomRight = new Point(450, 0);
-        table = new Box(150, 30, upperLeft, bottomRight);
+        Point upperLeft = new Point(0, 470);
+        table = new Rectangle(upperLeft.getX(),upperLeft.getY(),150,30);
 
         //Initialize LogicGame with the box
         if (newBall != null) {
-            LogicGame logicTable = new LogicGame(newBall, anchorPane, table);
+            LogicGame logicTable = new LogicGame(balls, anchorPane);
             logic.add(logicTable);
         }
     }
-*/
+
     @FXML
     private Color getRandomColorExceptRed() {
         Random random = new Random();
@@ -84,7 +85,7 @@ public class GameController {
                 if (newBall != null) {
                     LogicGame logicAdd = new LogicGame(balls, anchorPane);
                     logic.add(logicAdd);
-                    newBall.fallAnimation(anchorPane.getHeight());
+                    newBall.fallAnimation(470);
                     anchorPane.getChildren().addAll(newBall.getCircle());
                 }
             }
@@ -144,3 +145,4 @@ public class GameController {
         newBall = null;
     }
 }
+git config --global diecimaikol@gmail.com

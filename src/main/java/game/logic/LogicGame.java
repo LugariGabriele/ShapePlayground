@@ -1,5 +1,6 @@
 package game.logic;
 
+import game.gui.GameController;
 import game.tool.Ball;
 import game.tool.Box;
 import javafx.animation.AnimationTimer;
@@ -7,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 import java.awt.*;
 import java.util.List;
@@ -17,14 +19,14 @@ public class LogicGame {
     //  Point upperLeft = new Point(0, 370);
     // Point bottomRight = new Point(450, 0);
     @FXML
-    private Box box;
+    private javafx.scene.shape.Rectangle table;
     private List<Ball> balls;
 
 
     public LogicGame(List<Ball> balls, AnchorPane anchorPane) {
         this.balls = balls;
-        this.anchorPane = anchorPane;
-        // this.box = new Box(box.getWidth(),box.getHeight(),box.getUpperLeft(),box.getBottomRight());
+        LogicGame.anchorPane = anchorPane;
+        this.table=new Rectangle(0,470,150,30) ;
 
         startSimulation();// avvia la simulazione quando l'oggetto logicGame è creato
         mouseHandler(); // richiama eventi del mouse (gli ho spostati perchè ho cambiato constructor
@@ -42,7 +44,7 @@ public class LogicGame {
         new AnimationTimer() { // questo metodo viene chiamatoad ogni frame consentendo l'aggiornamento dell'animazione
             @Override
             public void handle(long now) {//metodo dell'interfaccia animationtimer che viene chiamato ad ogni frame di aminazione
-                //e dentro ci si mette cosa voglio che vengaeseguito continuamente dentro l'animazione
+                //e dentro ci si mette cosa voglio che venga eseguito continuamente dentro l'animazione
                 //nowè di base in nanosecondi
                 updatePositions();
                 checkCollisionBalls();
@@ -57,11 +59,11 @@ public class LogicGame {
             double newX = circle.getCenterX() + velocity.x;
             double newY = circle.getCenterY() + velocity.y;
 
-            if (newX - circle.getRadius() < 0 || newX + circle.getRadius() > anchorPane.getWidth()) {
-                velocity.x = -velocity.x;
+            if (newX + circle.getRadius() > anchorPane.getWidth()) {
+                velocity.x = 0;
             }
-            if (newY - circle.getRadius() < 0 || newY + circle.getRadius() > anchorPane.getHeight()) {
-                velocity.y = -velocity.y;
+            if (newY + circle.getRadius() > anchorPane.getHeight()) {
+                velocity.y = 0;
             }
 
             circle.setCenterX(newX);
@@ -108,7 +110,7 @@ public class LogicGame {
         double dy = center2.getY() - center1.getY();
         double distance = Math.sqrt(dx * dx + dy * dy);
 
-        //creo il vettore normale dei componenti che punta dal centro di una a qullo dell'altra
+        //creo il vettore normale dei componenti che punta dal centro di una a quello dell'altra
         double nx = dx / distance;
         double ny = dy / distance;
 
@@ -132,6 +134,7 @@ public class LogicGame {
         ball2.setVelocity(new Point((int) (tx * dpTan2 + nx * m2), (int) (ty * dpTan2 + ny * m2)));
 
     }
+
 
     /**
      * MOUSE EVENT

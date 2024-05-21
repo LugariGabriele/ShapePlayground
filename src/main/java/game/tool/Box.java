@@ -44,19 +44,19 @@ public class Box extends Rectangle {
     }
 
     public double getLowerBound() {
-        return Math.min(UpperLeft.x, BottomRight.x);
-    }
-
-    public double getUpperBound() {
-        return Math.max(UpperLeft.x, BottomRight.x);
-    }
-
-    public double getLeftBound() {
         return Math.min(UpperLeft.y, BottomRight.y);
     }
 
-    public double getRightBound() {
+    public double getUpperBound() {
         return Math.max(UpperLeft.y, BottomRight.y);
+    }
+
+    public double getLeftBound() {
+        return Math.min(UpperLeft.x, BottomRight.x);
+    }
+
+    public double getRightBound() {
+        return Math.max(UpperLeft.x, BottomRight.x);
     }
 
     @Override

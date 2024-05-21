@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.gui.GameController">
     <children>
-        <Rectangle arcHeight="4.0" arcWidth="4.0" fill="#964b00" height="30.0" stroke="BLACK" strokeType="INSIDE" width="150.0" y="470.0" />
+        <Rectangle fx:id="table" arcHeight="4.0" arcWidth="4.0" fill="#964b00" height="30.0" stroke="BLACK" strokeType="INSIDE" width="150.0" y="470.0" />
         <ButtonBar layoutX="586.0" layoutY="24.0" prefHeight="40.0" prefWidth="200.0">
             <buttons>
                 <ButtonBar prefHeight="52.0" prefWidth="202.0">
