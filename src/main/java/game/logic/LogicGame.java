@@ -1,8 +1,6 @@
 package game.logic;
 
-import game.gui.GameController;
 import game.tool.Ball;
-import game.tool.Box;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
@@ -176,10 +174,20 @@ public class LogicGame {
             newCenterY = anchorPane.getHeight() - draggedBall.getCircle().getRadius();
         }
 
+        // Controllo del bordo destro del tavolo
+        if (newCenterX < table.getWidth() + draggedBall.getCircle().getRadius()) {
+            newCenterX = table.getWidth() + draggedBall.getCircle().getRadius();
+        }
+        /*
+        // Controllo del bordo superiore del tavolo
+        if (newCenterY - draggedBall.getCircle().getRadius() < table.getHeight()) {
+            newCenterY = draggedBall.getCircle().getRadius() + table.getHeight();
+        }
+           */
         // Imposta la nuova posizione della palla
         draggedBall.getCircle().setCenterX(newCenterX);
         draggedBall.getCircle().setCenterY(newCenterY);
-        checkCollisionBalls();
+        //checkCollisionBalls();
 
     }
 
@@ -187,7 +195,7 @@ public class LogicGame {
     private void onMouseReleased(MouseEvent event) {
         Ball releasedBall = findBallByCircle((Circle) event.getSource());
         if (releasedBall != null) {
-            if (releasedBall.getCircle().getCenterX() <= 150 + releasedBall.getRadius()) {
+            if (releasedBall.getCircle().getCenterX() <= table.getWidth() + releasedBall.getRadius()) {
                 releasedBall.fallAnimation(table.getY()); // se la palla e nella zona del tavolo si deve fermare prima
             } else {
                 releasedBall.fallAnimation(anchorPane.getHeight()); // Avvia l'animazione di caduta
@@ -198,4 +206,4 @@ public class LogicGame {
 
     }
 }
-// siamo gay
+

@@ -49,12 +49,12 @@ public class GameController {
 
     @FXML
     public void initializeTable() {
-        // Create a Box instance and add it to the AnchorPane (example positioning)
-        Point upperLeft = new Point(0, 470);
+
+        Point upperLeft = new Point(0, 470); //posizione table
         table = new Rectangle(upperLeft.getX(),upperLeft.getY(),150,30);
 
-        //Initialize LogicGame with the box
-        if (newBall != null) {
+        //inizializzazione logica table
+        if (newBall != null) { //condizione dato che se non ho ball in scena non mi serve logica
             LogicGame logicTable = new LogicGame(balls, anchorPane);
             logic.add(logicTable);
         }
@@ -78,14 +78,14 @@ public class GameController {
 
         addButton.setOnMouseClicked(event -> {
             if (!deleteButtonOn) { // controllo che il delete button non sia attivo
-                Point spawnPoint = new Point(70, 400);
+                Point spawnPoint = new Point(30, 400);
                 newBall = new Ball(20, getRandomColorExceptRed(), spawnPoint);
                 balls.add(newBall);
                 newBall.getCircle().setOnMouseClicked(this::MouseClicked);
                 if (newBall != null) {
                     LogicGame logicAdd = new LogicGame(balls, anchorPane);
                     logic.add(logicAdd);
-                    newBall.fallAnimation(table.getY());
+                    newBall.fallAnimation(table.getY()); //faccio cadere fino a che non trova bordo alto tavolo
                     anchorPane.getChildren().addAll(newBall.getCircle());
                 }
             }
