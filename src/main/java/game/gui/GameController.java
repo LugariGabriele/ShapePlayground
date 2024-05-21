@@ -85,7 +85,7 @@ public class GameController {
                 if (newBall != null) {
                     LogicGame logicAdd = new LogicGame(balls, anchorPane);
                     logic.add(logicAdd);
-                    newBall.fallAnimation(470);
+                    newBall.fallAnimation(table.getY());
                     anchorPane.getChildren().addAll(newBall.getCircle());
                 }
             }

@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="aggiustato Click, spostato fallanimation in classe Ball e provato collisione tra ball,usato rectangle invece che box">
-      <changelist_data name="LugariGabriele" email="161489816+lugarigabriele@users.noreply.github.com" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="ciao">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/logic/LogicGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/logic/LogicGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/tool/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tool/Box.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/game/gui/box1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/game/gui/box1.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +49,7 @@
   &quot;isMigrated&quot;: true
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -189,7 +184,7 @@
       <workItem from="1716196683184" duration="1049000" />
       <workItem from="1716213554897" duration="7347000" />
       <workItem from="1716282884849" duration="6174000" />
-      <workItem from="1716294248223" duration="11825000" />
+      <workItem from="1716294248223" duration="14375000" />
     </task>
     <task id="LOCAL-00001" summary="created project">
       <option name="closed" value="true" />
@@ -295,7 +290,23 @@
       <option name="project" value="LOCAL" />
       <updated>1716220724614</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="aggiustato Click, spostato fallanimation in classe Ball e provato collisione tra ball,usato rectangle invece che box">
+      <option name="closed" value="true" />
+      <created>1716306662309</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1716306662309</updated>
+    </task>
+    <task id="LOCAL-00015" summary="ciao">
+      <option name="closed" value="true" />
+      <created>1716306853488</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1716306853488</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,7 +338,8 @@
     <MESSAGE value="non va ancora For del Click e ti ho aggiunto &#10;una spiegazione migliore del coso dei colori" />
     <MESSAGE value="aggiustato Click, spostato fallanimation in classe Ball e provato collisione tra ball" />
     <MESSAGE value="aggiustato Click, spostato fallanimation in classe Ball e provato collisione tra ball,usato rectangle invece che box" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiustato Click, spostato fallanimation in classe Ball e provato collisione tra ball,usato rectangle invece che box" />
+    <MESSAGE value="ciao" />
+    <option name="LAST_COMMIT_MESSAGE" value="ciao" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

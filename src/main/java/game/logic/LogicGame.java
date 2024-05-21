@@ -26,7 +26,7 @@ public class LogicGame {
     public LogicGame(List<Ball> balls, AnchorPane anchorPane) {
         this.balls = balls;
         LogicGame.anchorPane = anchorPane;
-        this.table=new Rectangle(0,470,150,30) ;
+        this.table = new Rectangle(0, 470, 150, 30);
 
         startSimulation();// avvia la simulazione quando l'oggetto logicGame è creato
         mouseHandler(); // richiama eventi del mouse (gli ho spostati perchè ho cambiato constructor
@@ -187,11 +187,15 @@ public class LogicGame {
     private void onMouseReleased(MouseEvent event) {
         Ball releasedBall = findBallByCircle((Circle) event.getSource());
         if (releasedBall != null) {
-            releasedBall.fallAnimation(anchorPane.getHeight()); // Avvia l'animazione di caduta
+            if (releasedBall.getCircle().getCenterX() <= 150 + releasedBall.getRadius()) {
+                releasedBall.fallAnimation(table.getY()); // se la palla e nella zona del tavolo si deve fermare prima
+            } else {
+                releasedBall.fallAnimation(anchorPane.getHeight()); // Avvia l'animazione di caduta
+            }
+
         }
 
+
     }
-
-
 }
 // siamo gay
