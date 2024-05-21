@@ -76,16 +76,15 @@ public class GameController {
     private void initializeAddButton() {
 
         addButton.setOnMouseClicked(event -> {
-            if (deleteButtonOn == false) { // controllo che il delete button non sia attivo
+            if (!deleteButtonOn) { // controllo che il delete button non sia attivo
                 Point spawnPoint = new Point(70, 400);
                 newBall = new Ball(20, getRandomColorExceptRed(), spawnPoint);
                 balls.add(newBall);
                 newBall.getCircle().setOnMouseClicked(this::MouseClicked);
-                System.out.println("ball:"+balls);
                 if (newBall != null) {
-                    LogicGame logicAdd = new LogicGame(newBall, anchorPane);
+                    LogicGame logicAdd = new LogicGame(balls, anchorPane);
                     logic.add(logicAdd);
-                    logicAdd.fallAnimation();
+                    newBall.fallAnimation(anchorPane.getHeight());
                     anchorPane.getChildren().addAll(newBall.getCircle());
                 }
             }
@@ -137,10 +136,8 @@ public class GameController {
 
     private void MouseClicked(MouseEvent event) {
         for (Ball ball : balls) {
-            System.out.println("ball presa"+ball);
             if (ball.getCircle().contains(event.getX(), event.getY())) {
                 newBall = ball;
-                System.out.println(""+ball);
                 return;
             }
         }
