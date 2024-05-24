@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="ciao">
+    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="aggiunto tentativo collisione tavolo in Dragmouse&#10;però va strano">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/logic/LogicGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/logic/LogicGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/game/gui/box1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/game/gui/box1.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,6 +187,8 @@
       <workItem from="1716213554897" duration="7347000" />
       <workItem from="1716282884849" duration="6174000" />
       <workItem from="1716294248223" duration="14375000" />
+      <workItem from="1716449128335" duration="43000" />
+      <workItem from="1716553057047" duration="5085000" />
     </task>
     <task id="LOCAL-00001" summary="created project">
       <option name="closed" value="true" />
@@ -307,7 +310,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716306853488</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="aggiunto tentativo collisione tavolo in Dragmouse&#10;però va strano">
+      <option name="closed" value="true" />
+      <created>1716327239385</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1716327239385</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -340,7 +351,8 @@
     <MESSAGE value="aggiustato Click, spostato fallanimation in classe Ball e provato collisione tra ball" />
     <MESSAGE value="aggiustato Click, spostato fallanimation in classe Ball e provato collisione tra ball,usato rectangle invece che box" />
     <MESSAGE value="ciao" />
-    <option name="LAST_COMMIT_MESSAGE" value="ciao" />
+    <MESSAGE value="aggiunto tentativo collisione tavolo in Dragmouse&#10;però va strano" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiunto tentativo collisione tavolo in Dragmouse&#10;però va strano" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

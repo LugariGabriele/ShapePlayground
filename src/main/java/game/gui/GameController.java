@@ -51,6 +51,7 @@ public class GameController {
     public void initializeTable() {
 
         Point upperLeft = new Point(0, 470); //posizione table
+
         table = new Rectangle(upperLeft.getX(),upperLeft.getY(),150,30);
 
         //inizializzazione logica table

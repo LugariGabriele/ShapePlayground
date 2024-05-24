@@ -23,7 +23,7 @@ public class LogicGame {
 
     public LogicGame(List<Ball> balls, AnchorPane anchorPane) {
         this.balls = balls;
-        LogicGame.anchorPane = anchorPane;
+        this.anchorPane = anchorPane;
         this.table = new Rectangle(0, 470, 150, 30);
 
         startSimulation();// avvia la simulazione quando l'oggetto logicGame è creato
@@ -43,7 +43,7 @@ public class LogicGame {
             @Override
             public void handle(long now) {//metodo dell'interfaccia animationtimer che viene chiamato ad ogni frame di aminazione
                 //e dentro ci si mette cosa voglio che venga eseguito continuamente dentro l'animazione
-                //nowè di base in nanosecondi
+                //now è di base in nanosecondi
                 updatePositions();
                 checkCollisionBalls();
             }
@@ -160,6 +160,7 @@ public class LogicGame {
         double newCenterX = mouseX;
         double newCenterY = mouseY;
 
+
         // Controlla se la ball raggiunge i bordi dell anchorPane
         if (newCenterX - draggedBall.getCircle().getRadius() < 0) { //sx
             newCenterX = draggedBall.getCircle().getRadius();
@@ -168,22 +169,26 @@ public class LogicGame {
         }
 
 
-        if (newCenterY - draggedBall.getCircle().getRadius() < 0) { //basso
+        if (newCenterY + draggedBall.getCircle().getRadius() < 0) { //basso
             newCenterY = draggedBall.getCircle().getRadius();
         } else if (newCenterY + draggedBall.getCircle().getRadius() > anchorPane.getHeight()) {//alto
             newCenterY = anchorPane.getHeight() - draggedBall.getCircle().getRadius();
         }
 
+/*          non serve più ma teniamolo per ora(non si sa mai)
         // Controllo del bordo destro del tavolo
-        if (newCenterX < table.getWidth() + draggedBall.getCircle().getRadius()) {
+         else if (newCenterX + draggedBall.getCircle().getRadius() ==170 && newCenterY + draggedBall.getCircle().getRadius() >=anchorPane.getHeight() - table.getHeight() ) {
             newCenterX = table.getWidth() + draggedBall.getCircle().getRadius();
         }
-        /*
+*/
+
         // Controllo del bordo superiore del tavolo
-        if (newCenterY - draggedBall.getCircle().getRadius() < table.getHeight()) {
-            newCenterY = draggedBall.getCircle().getRadius() + table.getHeight();
+        if (newCenterY + draggedBall.getCircle().getRadius() >= anchorPane.getHeight() - table.getHeight()
+                && newCenterX <= table.getWidth() + draggedBall.getCircle().getRadius())
+            {
+            newCenterY = anchorPane.getHeight() - table.getHeight() - draggedBall.getCircle().getRadius();
         }
-           */
+
         // Imposta la nuova posizione della palla
         draggedBall.getCircle().setCenterX(newCenterX);
         draggedBall.getCircle().setCenterY(newCenterY);
@@ -195,7 +200,7 @@ public class LogicGame {
     private void onMouseReleased(MouseEvent event) {
         Ball releasedBall = findBallByCircle((Circle) event.getSource());
         if (releasedBall != null) {
-            if (releasedBall.getCircle().getCenterX() <= table.getWidth() + releasedBall.getRadius()) {
+            if (releasedBall.getCircle().getCenterX() + releasedBall.getRadius() <= table.getWidth()) {
                 releasedBall.fallAnimation(table.getY()); // se la palla e nella zona del tavolo si deve fermare prima
             } else {
                 releasedBall.fallAnimation(anchorPane.getHeight()); // Avvia l'animazione di caduta
