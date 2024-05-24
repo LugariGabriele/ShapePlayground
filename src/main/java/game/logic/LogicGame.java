@@ -175,6 +175,7 @@ public class LogicGame {
             newCenterY = anchorPane.getHeight() - draggedBall.getCircle().getRadius();
         }
 
+
 /*          non serve più ma teniamolo per ora(non si sa mai)
         // Controllo del bordo destro del tavolo
          else if (newCenterX + draggedBall.getCircle().getRadius() ==170 && newCenterY + draggedBall.getCircle().getRadius() >=anchorPane.getHeight() - table.getHeight() ) {
