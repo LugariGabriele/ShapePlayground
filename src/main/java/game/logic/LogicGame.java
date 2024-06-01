@@ -3,21 +3,27 @@ package game.logic;
 import game.tool.Ball;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import org.dyn4j.dynamics.Body;
+import org.dyn4j.geometry.Vector2;
+import org.dyn4j.world.World;
 
 import java.awt.*;
 import java.util.List;
 
 public class LogicGame {
-
+    private static final double GRAVITY = 9.8; // accelerazione di gravità in m/s^2
+    private static final double TIME_STEP = 1.0 / 60.0; // durata di ogni passo di simulazione in secondi
+    private static final double DAMPING = 0.99; // coefficiente di smorzamento dell'attrito dell'aria
     private static AnchorPane anchorPane;
-    //  Point upperLeft = new Point(0, 370);
-    // Point bottomRight = new Point(450, 0);
-    @FXML
-    private javafx.scene.shape.Rectangle table;
+    private final World world;
+
+
+    private Rectangle table;
     private List<Ball> balls;
 
 
@@ -25,11 +31,17 @@ public class LogicGame {
         this.balls = balls;
         this.anchorPane = anchorPane;
         this.table = new Rectangle(0, 470, 150, 30);
+        this.world = new World();
+        this.world.setGravity(new Vector2(0, GRAVITY));
 
-        startSimulation();// avvia la simulazione quando l'oggetto logicGame è creato
-        mouseHandler(); // richiama eventi del mouse (gli ho spostati perchè ho cambiato constructor
+        for (Ball ball : balls) {
+            this.world.addBody(ball.getBody());
+        }
 
+        startSimulation(); // avvia la simulazione quando l'oggetto logicGame è creato
+        mouseHandler(); // richiama eventi del mouse
     }
+
 
     public void mouseHandler() {
         for (Ball ball : balls) {
@@ -39,101 +51,54 @@ public class LogicGame {
     }
 
     public void startSimulation() {
-        new AnimationTimer() { // questo metodo viene chiamatoad ogni frame consentendo l'aggiornamento dell'animazione
+        new AnimationTimer() {
             @Override
-            public void handle(long now) {//metodo dell'interfaccia animationtimer che viene chiamato ad ogni frame di aminazione
-                //e dentro ci si mette cosa voglio che venga eseguito continuamente dentro l'animazione
-                //now è di base in nanosecondi
-                updatePositions();
-                checkCollisionBalls();
+            public void handle(long now) {
+                world.update(TIME_STEP);
+                for (Ball ball : balls) {
+                    updateBallPosition(ball);
+                    checkCollisionWithTable(ball);
+                    checkCollisionWithAnchorPane(ball);
+                }
             }
         }.start();
     }
 
-    private void updatePositions() {
-        for (Ball ball : balls) {
-            Point velocity = ball.getVelocity();
-            Circle circle = ball.getCircle();
-            double newX = circle.getCenterX() + velocity.x;
-            double newY = circle.getCenterY() + velocity.y;
-
-            if (newX + circle.getRadius() > anchorPane.getWidth()) {
-                velocity.x = 0;
-            }
-            if (newY + circle.getRadius() > anchorPane.getHeight()) {
-                velocity.y = 0;
-            }
-
-            circle.setCenterX(newX);
-            circle.setCenterY(newY);
+    private void checkCollisionWithTable(Ball ball) {
+        Body body = ball.getBody();
+        if (body.getTransform().getTranslationY() + ball.getRadius() >= table.getY() &&
+                body.getTransform().getTranslationX() <= table.getWidth() + ball.getRadius()) {
+            body.getTransform().setTranslation(body.getTransform().getTranslationX(), table.getY() - ball.getRadius());
+            body.setLinearVelocity(body.getLinearVelocity().multiply(-DAMPING));
         }
     }
 
-    public void checkCollisionBalls() { // cosi riesco a controllare più di due palle
-        for (int i = 0; i < balls.size(); i++) {
-            for (int j = i + 1; j < balls.size(); j++) {
-                Ball ball1 = balls.get(i); // inizializzo variabile in base a indice
-                Ball ball2 = balls.get(j);
-                if (isColliding(ball1, ball2)) {
-                    handleCollision(ball1, ball2);// chiamo metodo gestisce collisioni
-                }
-            }
+    private void updateBallPosition(Ball ball) {
+        Body body = ball.getBody();
+        ball.setCenter(new Point2D(body.getTransform().getTranslationX(), body.getTransform().getTranslationY()));
+    }
+
+    private void checkCollisionWithAnchorPane(Ball ball) {
+        Body body = ball.getBody();
+        double radius = ball.getRadius();
+        double x = body.getTransform().getTranslationX();
+        double y = body.getTransform().getTranslationY();
+        if (x - radius < 0) {
+            body.getTransform().setTranslation(radius, y);
+            body.setLinearVelocity(body.getLinearVelocity().multiply(-DAMPING));
+        } else if (x + radius > anchorPane.getWidth()) {
+            body.getTransform().setTranslation(anchorPane.getWidth() - radius, y);
+            body.setLinearVelocity(body.getLinearVelocity().multiply(-DAMPING));
+        }
+
+        if (y - radius < 0) {
+            body.getTransform().setTranslation(x, radius);
+            body.setLinearVelocity(body.getLinearVelocity().multiply(-DAMPING));
+        } else if (y + radius > anchorPane.getHeight()) {
+            body.getTransform().setTranslation(x, anchorPane.getHeight() - radius);
+            body.setLinearVelocity(body.getLinearVelocity().multiply(-DAMPING));
         }
     }
-
-    private boolean isColliding(Ball ball1, Ball ball2) { //era nel collisionManager che avevo fatto io
-        double radiusSum = ball1.getRadius() + ball2.getRadius();
-        double distance = Math.sqrt(Math.pow(ball1.getCircle().getCenterX() - ball2.getCircle().getCenterX(), 2) +
-                Math.pow(ball1.getCircle().getCenterY() - ball2.getCircle().getCenterY(), 2)); // radice di x^2+y^2
-        return distance <= radiusSum;
-        // se la distanza tra i due centri è minore della somma dei due raggi allora si compenetrano o toccano se =
-    }
-
-    /**
-     * Graficamente, ciò che accade è che la velocità di ciascuna pallina viene scomposta in due componenti:
-     * una lungo la linea che collega i centri delle due palline (normale) e una perpendicolare ad essa (tangente).
-     * Nell'urto, tra le due sfere si scambiano le componenti lungo la direzione normale (poiché hanno la stessa massa),
-     * mentre le componenti tangenti rimangono invariate.
-     * Ciò si traduce in un cambio di direzione e velocità per ciascuna palla secondo le leggi dell'urto elastico.
-     */
-    private void handleCollision(Ball ball1, Ball ball2) {// gestisce collisioni
-        Point vel1 = ball1.getVelocity();
-        Point vel2 = ball2.getVelocity();
-
-        Point center1 = ball1.getCenter();
-        Point center2 = ball2.getCenter();
-
-        //calcolo la distanza tra ball
-        double dx = center2.getX() - center2.getX();
-        double dy = center2.getY() - center1.getY();
-        double distance = Math.sqrt(dx * dx + dy * dy);
-
-        //creo il vettore normale dei componenti che punta dal centro di una a quello dell'altra
-        double nx = dx / distance;
-        double ny = dy / distance;
-
-        //vettore tangente al vettore normale
-        double tx = -ny;
-        double ty = -nx;
-
-        //proietto velocità sui due vettori
-        double dpTan1 = vel1.x * tx + vel1.y * ty;
-        double dpTan2 = vel2.x * tx + vel2.y * ty;
-
-        double dpNorm1 = vel1.x * nx + vel1.y * ny;
-        double dpNorm2 = vel2.x * nx + vel2.y * ny;
-
-        //scambio i componenti del vettore velocità normale assumedo che abbiano massa uguale dato che ball sono grandi uguali
-        double m1 = dpNorm2;
-        double m2 = dpNorm1;
-
-        //aggiorno la velocità delle palle combinando il vettore tangente e i nuovi componenti nel normale
-        ball1.setVelocity(new Point((int) (tx * dpTan1 + nx * m1), (int) (ty * dpTan1 + ny * m1)));
-        ball2.setVelocity(new Point((int) (tx * dpTan2 + nx * m2), (int) (ty * dpTan2 + ny * m2)));
-
-    }
-
-
     /**
      * MOUSE EVENT
      */
@@ -175,25 +140,17 @@ public class LogicGame {
             newCenterY = anchorPane.getHeight() - draggedBall.getCircle().getRadius();
         }
 
-
-/*          non serve più ma teniamolo per ora(non si sa mai)
-        // Controllo del bordo destro del tavolo
-         else if (newCenterX + draggedBall.getCircle().getRadius() ==170 && newCenterY + draggedBall.getCircle().getRadius() >=anchorPane.getHeight() - table.getHeight() ) {
-            newCenterX = table.getWidth() + draggedBall.getCircle().getRadius();
-        }
-*/
-
         // Controllo del bordo superiore del tavolo
-        if (newCenterY + draggedBall.getCircle().getRadius() >= anchorPane.getHeight() - table.getHeight()
-                && newCenterX <= table.getWidth() + draggedBall.getCircle().getRadius())
-            {
+       if (newCenterY + draggedBall.getCircle().getRadius() >= anchorPane.getHeight() - table.getHeight()
+                && newCenterX <= table.getWidth() + draggedBall.getCircle().getRadius()) {
             newCenterY = anchorPane.getHeight() - table.getHeight() - draggedBall.getCircle().getRadius();
         }
 
         // Imposta la nuova posizione della palla
         draggedBall.getCircle().setCenterX(newCenterX);
         draggedBall.getCircle().setCenterY(newCenterY);
-        //checkCollisionBalls();
+        draggedBall.getBody().getTransform().setTranslation(newCenterX, newCenterY);
+
 
     }
 

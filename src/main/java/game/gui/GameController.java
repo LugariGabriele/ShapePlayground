@@ -2,8 +2,8 @@ package game.gui;
 
 import game.logic.LogicGame;
 import game.tool.Ball;
-import game.tool.Box;
 import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
@@ -11,6 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import org.dyn4j.dynamics.Body;
+import org.dyn4j.world.World;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ public class GameController {
     public List<Ball> balls = new ArrayList<>();
     @FXML
     boolean deleteButtonOn = false;
+    @FXML public World world = new World<>();
     @FXML
     private List<LogicGame> logic = new ArrayList<>();
 
@@ -52,10 +55,10 @@ public class GameController {
 
         Point upperLeft = new Point(0, 470); //posizione table
 
-        table = new Rectangle(upperLeft.getX(),upperLeft.getY(),150,30);
+        table = new Rectangle(upperLeft.getX(), upperLeft.getY(), 150, 30);
 
         //inizializzazione logica table
-        if (newBall != null) { //condizione dato che se non ho ball in scena non mi serve logica
+        if (!balls.isEmpty()) { //condizione dato che se non ho ball in scena non mi serve logica
             LogicGame logicTable = new LogicGame(balls, anchorPane);
             logic.add(logicTable);
         }
@@ -79,8 +82,8 @@ public class GameController {
 
         addButton.setOnMouseClicked(event -> {
             if (!deleteButtonOn) { // controllo che il delete button non sia attivo
-                Point spawnPoint = new Point(30, 400);
-                newBall = new Ball(20, getRandomColorExceptRed(), spawnPoint);
+                Point2D spawnPoint = new Point2D(30, 400);
+                newBall = new Ball(20, getRandomColorExceptRed(), spawnPoint,world);
                 balls.add(newBall);
                 newBall.getCircle().setOnMouseClicked(this::MouseClicked);
                 if (newBall != null) {

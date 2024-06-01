@@ -1,35 +1,43 @@
 package game.tool;
 
 import javafx.animation.AnimationTimer;
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-
-import java.awt.*;
-import java.util.Objects;
-
+import org.dyn4j.dynamics.Body;
+import org.dyn4j.dynamics.BodyFixture;
+import org.dyn4j.geometry.MassType;
+import org.dyn4j.geometry.Vector2;
+import org.dyn4j.world.World;
 
 public class Ball extends Circle {
-    double radius;
-    Paint color;
-    Circle circle;
-    Point center;
-    Point velocity;
-    double mass;
+    public Circle circle;
+    public World world;
+    private double radius;
+    private Paint color;
+    private Point2D center;
+    private Body body;
+    private Point2D velocity;
+    private AnimationTimer animationTimer;
 
-    public Ball(double radius, Paint color, Point center) {
+    public Ball(double radius, Paint color, Point2D center, World world) {
+        validate(radius);
         this.radius = radius;
         this.center = center;
-        this.circle = new Circle(center.getX(), center.getY(), radius, color);
-        this.velocity = new Point(0, 0);
+        this.color = color;
+        this.circle = new Circle(center.getX(), center.getY(), radius);
+        this.world = world;
+        this.body = createBody();
+        this.velocity = new Point2D(0, 0);
 
+        setCenterX(center.getX());
+        setCenterY(center.getY());
+        setRadius(radius);
+        setFill(color);
 
+        fallAnimation(500);
     }
 
-
-    /**
-     * @param radius
-     * @return a warning string if the radius is negative
-     */
     private static boolean validate(double radius) {
         if (radius <= 0.0) {
             throw new IllegalArgumentException("radius can't be a negative value");
@@ -37,22 +45,34 @@ public class Ball extends Circle {
             return true;
         }
     }
-
-    /**
-     * @return the circumference of the Ball
-     */
-    public double getCircumference() {
-        return 2 * this.radius * Math.PI;
+    private Body createBody() {
+        Body body = new Body();
+        org.dyn4j.geometry.Circle geomCircle = new org.dyn4j.geometry.Circle(radius);
+        BodyFixture fixture = new BodyFixture(geomCircle);
+        fixture.setDensity(1);
+        fixture.setFriction(1);
+        body.addFixture(fixture);
+        body.setMass(MassType.NORMAL);
+        body.getTransform().setTranslation(center.getX(), center.getY());
+        world.addBody(body);
+        return body;
     }
 
-    /**
-     * @return the area of the ball
-     */
-    public double getArea() {
-
-        return Math.PI * this.radius * this.radius;
+    public Point2D getVelocity() {
+        return velocity;
     }
 
+    public World getWorld() {
+        return world;
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
+    }
+
+    public void setVelocity(Point2D velocity) {
+        this.velocity = velocity;
+    }
 
     public Paint getColor() {
         return color;
@@ -60,36 +80,36 @@ public class Ball extends Circle {
 
     public void setColor(Paint color) {
         this.color = color;
+        setFill(color);
     }
 
-    public Point getCenter() {
+    public Point2D getCenter() {
         return center;
     }
 
-    public void setCenter(Point center) {
-        circle.setCenterX(center.getX());
-        circle.setCenterY(center.getY());
+    public void setCenter(Point2D center) {
+        this.center = center;
+        setCenterX(center.getX());
+        setCenterY(center.getY());
     }
 
     public Circle getCircle() {
         return circle;
     }
 
-    public Point getVelocity() {
-        return velocity;
+    public Body getBody() {
+        return body;
     }
 
-    public void setVelocity(Point velocity) {
-        this.velocity = velocity;
-    }
-
-    public double getMass() {
-        return mass;
+    public void setBody(Body body) {
+        this.body = body;
     }
 
     public void fallAnimation(double finalY) {
-        double fallSpeed = 5;
-        new AnimationTimer() {
+
+        world.setGravity(new Vector2(0, 9.8)); // set gravity to 9.8 m/s^2
+
+        AnimationTimer animationTimer = new AnimationTimer() {
             private long lastUpdate = 0;
 
             @Override
@@ -100,40 +120,21 @@ public class Ball extends Circle {
                 }
 
                 double elapsedTime = (now - lastUpdate) / 1.5e7;
-                double newY = circle.getCenterY() + fallSpeed * elapsedTime;
 
-                if (newY >= finalY - circle.getRadius()) {
-                    newY = finalY - circle.getRadius();
+                world.update(elapsedTime); // update the physics world
+
+                setCenterX(body.getTransform().getTranslationX());
+                setCenterY(body.getTransform().getTranslationY());
+
+                if (body.getTransform().getTranslationY() >= finalY - getRadius()) {
                     stop();
                 }
 
-                circle.setCenterY(newY);
                 lastUpdate = now;
             }
-        }.start();
+        };
+        animationTimer.start();
     }
 
-    @Override
-    public String toString() {
-        return "org.example.Ball{" +
-                "radius=" + radius +
-                ", color=" + color +
-                ", XY=" + center +
-                '}';
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Ball ball = (Ball) o;
-        return Double.compare(radius, ball.radius) == 0 && Double.compare(mass, ball.mass) == 0 && Objects.equals(color, ball.color) && Objects.equals(circle, ball.circle) && Objects.equals(center, ball.center) && Objects.equals(velocity, ball.velocity);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(radius, color, circle, center, velocity, mass);
-    }
 }
-
-
