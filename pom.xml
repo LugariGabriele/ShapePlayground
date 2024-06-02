@@ -29,9 +29,13 @@
            <artifactId>dyn4j</artifactId>
            <version>5.0.2</version>
        </dependency>
-
    </dependencies>
 
-
+    <repositories>
+        <repository>
+            <id>dyn4j-repo</id>
+            <url>https://raw.githubusercontent.com/dyn4j/dyn4j/maven-repo/</url>
+        </repository>
+    </repositories>
 
 </project>

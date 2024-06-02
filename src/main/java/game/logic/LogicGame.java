@@ -1,5 +1,5 @@
 package game.logic;
-
+/*
 import game.tool.Ball;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
@@ -102,7 +102,7 @@ public class LogicGame {
     /**
      * MOUSE EVENT
      */
-
+/*
     private Ball findBallByCircle(Circle circle) { // metodo più preciso per dragg
         /* lo stream serve per fare operazioni fi filtraggio su elementi della lista
          Questo filtro si applica a ciascuna pallina (ball) nella lista. ball.getCircle().equals(circle)
@@ -111,6 +111,7 @@ public class LogicGame {
           .findFirst(): Una volta applicato il filtro, questo restituisce il primo elemento che soddisfa
           il criterio del filtro. In questo caso, restituirà la prima pallina il cui cerchio corrisponde al cerchio specificato.
      */
+/*
         return balls.stream().filter(ball -> ball.getCircle().equals(circle)).findFirst().orElse(null);
     }
 
@@ -170,3 +171,4 @@ public class LogicGame {
     }
 }
 
+*/

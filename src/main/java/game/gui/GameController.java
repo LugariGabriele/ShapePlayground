@@ -1,101 +1,59 @@
 package game.gui;
 
-import game.logic.LogicGame;
+
 import game.tool.Ball;
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
-import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
-import org.dyn4j.dynamics.Body;
+import org.dyn4j.geometry.Vector2;
 import org.dyn4j.world.World;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
 
 public class GameController {
-    @FXML
-    public AnchorPane anchorPane;
-    @FXML
-    public Button addButton;
-    @FXML
-    public ToggleButton deleteButton;
-    @FXML
-    public Ball newBall;
-    @FXML
-    public javafx.scene.shape.Rectangle table;
-    @FXML
-    public List<Ball> balls = new ArrayList<>();
-    @FXML
-    boolean deleteButtonOn = false;
-    @FXML public World world = new World<>();
-    @FXML
-    private List<LogicGame> logic = new ArrayList<>();
 
+    private World world;
+    @FXML
+    private AnchorPane anchorPane;
+    private Ball ball;
+    @FXML
+    private Button addButton;
+    @FXML
+    private ToggleButton deleteButton;
+    @FXML
+    private boolean deleteButtonOn = false;
+    private List<Ball> balls = new ArrayList<>();
+
+    @FXML
     public void initialize() {
-        /*
-        In a few words: The constructor is called first, then any @FXML annotated fields are populated, then initialize() is called.
-
-        This means the constructor does not have access to @FXML fields referring to components defined in the .fxml file, while initialize() does have access to them. STACK OVERFLOW
-        */
-
-        initializeAddButton();
-        initializeDeleteButton();
-        initializeTable();
+        world = new World<>(); // creo mondo fisica
+        world.setGravity(new Vector2(0, 100)); // 100 è la velocità con cui vanno verso basso(ho messo 9.8 ma va lentissimo)
+        AnimationTimer timer = new AnimationTimer() { //uso per aggiornare mondo dopo
+            @Override
+            public void handle(long now) {
+                update();
+            }
+        };
+        timer.start();
     }
 
     @FXML
-    public void initializeTable() {
-
-        Point upperLeft = new Point(0, 470); //posizione table
-
-        table = new Rectangle(upperLeft.getX(), upperLeft.getY(), 150, 30);
-
-        //inizializzazione logica table
-        if (!balls.isEmpty()) { //condizione dato che se non ho ball in scena non mi serve logica
-            LogicGame logicTable = new LogicGame(balls, anchorPane);
-            logic.add(logicTable);
-        }
-    }
-
-    @FXML
-    private Color getRandomColorExceptRed() {
-        Random random = new Random();
-        float red = 0, green = 0, blue = 0;
-        do { //gives a random value between 0.0 and 1.0 of colors components
-            red = random.nextFloat();
-            green = random.nextFloat();
-            blue = random.nextFloat();
-        } while (red > 0.7); //(ciclo whilesi ripete fino a che condizione nella parentesi non è falsa)
-        // fa in modo che se red> 0.7 il ciclo si ripete la parte del Do (colore rosso è superiore a 0.7)
-        return Color.color(red, green, blue);
-    }
-
-    @FXML
-    private void initializeAddButton() {
+    private void initilizeAddButton() {
 
         addButton.setOnMouseClicked(event -> {
-            if (!deleteButtonOn) { // controllo che il delete button non sia attivo
-                Point2D spawnPoint = new Point2D(30, 400);
-                newBall = new Ball(20, getRandomColorExceptRed(), spawnPoint,world);
-                balls.add(newBall);
-                newBall.getCircle().setOnMouseClicked(this::MouseClicked);
-                if (newBall != null) {
-                    LogicGame logicAdd = new LogicGame(balls, anchorPane);
-                    logic.add(logicAdd);
-                    newBall.fallAnimation(table.getY()); //faccio cadere fino a che non trova bordo alto tavolo
-                    anchorPane.getChildren().addAll(newBall.getCircle());
-                }
+            if (!deleteButtonOn) {
+                ball = new Ball(20, 400, 100);
+                world.addBody(ball.getBody());
+                balls.add(ball);
+                anchorPane.getChildren().add(ball.getGraphicCircle());
             }
         });
-
-
     }
 
     @FXML
@@ -118,11 +76,12 @@ public class GameController {
     private void deleteSelectedBall() {
         System.out.println("Delete Mode ON");
         for (Ball ball : balls) {
-            Paint originalColor = ball.getCircle().getFill(); //store original color
-            ball.getCircle().setOnMouseEntered(mouseEvent -> ball.getCircle().setFill(Color.RED)); // se entra mouse diventa rossa
-            ball.getCircle().setOnMouseExited(mouseEvent -> ball.getCircle().setFill(originalColor)); // se esce torna colore normale
-            ball.getCircle().setOnMouseClicked(mouseEvent -> {
-                anchorPane.getChildren().remove(ball.getCircle()); // cancella dalla scena
+            Paint originalColor = ball.getGraphicCircle().getFill(); //immagazzina colore base della palla
+            ball.getGraphicCircle().setOnMouseEntered(mouseEvent -> ball.getGraphicCircle().setFill(Color.RED)); // se entra mouse diventa rossa
+            ball.getGraphicCircle().setOnMouseExited(mouseEvent -> ball.getGraphicCircle().setFill(originalColor)); // se esce torna colore normale
+            ball.getGraphicCircle().setOnMouseClicked(mouseEvent -> {
+                world.removeBody(ball.getBody()); // rimuovo dal mondo della simulazione fisica
+                anchorPane.getChildren().remove(ball.getGraphicCircle()); // cancella dalla scena
                 balls.remove(ball); // rimuove dall' elenco
             });
         }
@@ -132,20 +91,50 @@ public class GameController {
     private void disableDeleteSelectedBall() {
         System.out.println("Delete Mode OFF");
         for (Ball ball : balls) {
-            // Remove event handlers for delete mode
-            ball.getCircle().setOnMouseEntered(null);
-            ball.getCircle().setOnMouseExited(null);
-            ball.getCircle().setOnMouseClicked(null);
+            // disattivo eventi mouse
+            ball.getGraphicCircle().setOnMouseEntered(null);
+            ball.getGraphicCircle().setOnMouseExited(null);
+            ball.getGraphicCircle().setOnMouseClicked(null);
         }
     }
 
-    private void MouseClicked(MouseEvent event) {
+    private void update() {
+        //faccio animazione per aggiornare il mondo fisico
+        world.update(1.0 / 6.0); //aggiorna il mondo a 6FPS
         for (Ball ball : balls) {
-            if (ball.getCircle().contains(event.getX(), event.getY())) {
-                newBall = ball;
-                return;
+            // posizione della palla nel mondo fisico
+            Vector2 position = ball.getBody().getTransform().getTranslation();
+
+            // aggiorno partegrafica
+            ball.getGraphicCircle().setCenterX(position.x);
+            ball.getGraphicCircle().setCenterY(position.y);
+
+            // controllo bordi anchorpane
+            double radius = ball.getGraphicCircle().getRadius();
+            double anchorPaneWidth = anchorPane.getWidth();
+            double anchorPaneHeight = anchorPane.getHeight();
+            /**
+             * Math.max(radius, position.x) assicura che la palla non vada a sinistra oltre il bordo sinistro dell'AnchorPane.
+             * La funzione Math.min(..., anchorPaneWidth - radius) assicura che la palla non vada a destra oltre il bordo destro
+             */
+            double newX = Math.min(Math.max(radius, position.x), anchorPaneWidth - radius);
+            /**
+             * simile a sopra
+             */
+            double newY = Math.min(Math.max(radius, position.y), anchorPaneHeight - radius);
+
+            if (newX != position.x || newY != position.y) { // controlla se tocca bordo
+                ball.getBody().setLinearVelocity(0, 0); // ferma la palla azzerando velocità
+                ball.getBody().setAngularVelocity(0); // ferma rotazione
+                ball.getGraphicCircle().setCenterX(newX); // setto posizione grafica nuove
+                ball.getGraphicCircle().setCenterY(newY);
+                ball.getBody().getTransform().setTranslation(new Vector2(newX, newY)); // setto anche nuove per mondo fisico
+                continue; // serve perchè quando arrivavano in fondo quando spawnate collidevano ma piano piano dopo
+                // compenetravano il pavimento
             }
+
+            // se ball non tocca bordo......
         }
-        newBall = null;
     }
 }
+

@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="aggiunto tentativo collisione tavolo in Dragmouse&#10;però va strano">
+    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="aggiunto classe Body a ball e modificato LogicGame però quando runnato da errore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/GameApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/logic/LogicGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/logic/LogicGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/tool/CollisionManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/tool/Box.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/game/gui/box1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/game/gui/box1.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/game/gui/styles.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +70,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.GameApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GameController.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;Application.game.gui.GameApplication.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -74,7 +78,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/cri/IdeaProjects/toy_box/src/main/resources&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/cri/IdeaProjects/BallsBox/src/main/java/game&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -94,6 +98,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\cri\IdeaProjects\BallsBox\src\main\java\game" />
       <recent name="C:\Users\cri\IdeaProjects\toy_box\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -112,6 +117,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="gui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="game.gui.GameController" />
+      <module name="ToyBox" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="game.gui.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -148,6 +166,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.game.gui.GameApplication" />
+        <item itemvalue="Application.GameController" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.GameApplication" />
       </list>
@@ -191,7 +210,9 @@
       <workItem from="1716294248223" duration="14375000" />
       <workItem from="1716449128335" duration="43000" />
       <workItem from="1716553057047" duration="5085000" />
-      <workItem from="1717240346208" duration="7674000" />
+      <workItem from="1717240346208" duration="9291000" />
+      <workItem from="1717256029763" duration="5264000" />
+      <workItem from="1717331017892" duration="9243000" />
     </task>
     <task id="LOCAL-00001" summary="created project">
       <option name="closed" value="true" />
@@ -321,7 +342,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716327239385</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="aggiunto classe Body a ball e modificato LogicGame però quando runnato da errore">
+      <option name="closed" value="true" />
+      <created>1717249206305</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1717249206305</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -355,7 +384,8 @@
     <MESSAGE value="aggiustato Click, spostato fallanimation in classe Ball e provato collisione tra ball,usato rectangle invece che box" />
     <MESSAGE value="ciao" />
     <MESSAGE value="aggiunto tentativo collisione tavolo in Dragmouse&#10;però va strano" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiunto tentativo collisione tavolo in Dragmouse&#10;però va strano" />
+    <MESSAGE value="aggiunto classe Body a ball e modificato LogicGame però quando runnato da errore" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiunto classe Body a ball e modificato LogicGame però quando runnato da errore" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,140 +1,95 @@
 package game.tool;
 
-import javafx.animation.AnimationTimer;
-import javafx.geometry.Point2D;
-import javafx.scene.paint.Paint;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.geometry.MassType;
-import org.dyn4j.geometry.Vector2;
-import org.dyn4j.world.World;
 
-public class Ball extends Circle {
-    public Circle circle;
-    public World world;
-    private double radius;
-    private Paint color;
-    private Point2D center;
+
+public class Ball {
+    private Circle graphicCircle;
     private Body body;
-    private Point2D velocity;
-    private AnimationTimer animationTimer;
+    private BodyFixture fixture;
+    private org.dyn4j.geometry.Circle shape;
+    private boolean isDragging = false; // Flag per indicare se la palla è trascinata
+    private double gravityScale = 1.0; // è una scala che va da 0.0 a 1.0 e serve per dare la forza con cui è affetta da gravità
 
-    public Ball(double radius, Paint color, Point2D center, World world) {
-        validate(radius);
-        this.radius = radius;
-        this.center = center;
-        this.color = color;
-        this.circle = new Circle(center.getX(), center.getY(), radius);
-        this.world = world;
-        this.body = createBody();
-        this.velocity = new Point2D(0, 0);
-
-        setCenterX(center.getX());
-        setCenterY(center.getY());
-        setRadius(radius);
-        setFill(color);
-
-        fallAnimation(500);
-    }
-
-    private static boolean validate(double radius) {
-        if (radius <= 0.0) {
-            throw new IllegalArgumentException("radius can't be a negative value");
-        } else {
-            return true;
-        }
-    }
-    private Body createBody() {
-        Body body = new Body();
-        org.dyn4j.geometry.Circle geomCircle = new org.dyn4j.geometry.Circle(radius);
-        BodyFixture fixture = new BodyFixture(geomCircle);
-        fixture.setDensity(1);
-        fixture.setFriction(1);
+    public Ball(double radius, double centerX, double centerY) {
+        graphicCircle = new Circle(radius, getRandomColorExceptRed());
+        body = new Body();
+        shape = new org.dyn4j.geometry.Circle(radius);
+        fixture = new BodyFixture(shape);
+        /**
+         * propietà della ball (a sentimento)
+         */
+        fixture.setDensity(1.0);
+        fixture.setFriction(0.5); // coeff attrito(più alto è più scorre male tra oggetti)
+        fixture.setRestitution(0.8); // resistenza all'aria (se alto non inizia a ruotare anche se non si vede nel nostro dato che non
+        //  abbiamo nulla per capirlo)
         body.addFixture(fixture);
         body.setMass(MassType.NORMAL);
-        body.getTransform().setTranslation(center.getX(), center.getY());
-        world.addBody(body);
-        return body;
+        body.translate(centerX, centerY); // posizione iniziale corpo fisico
+
+
+        // Aggiungi gestori degli eventi del mouse per il trascinamento della palla
+        eventMouseHandler();
     }
 
-    public Point2D getVelocity() {
-        return velocity;
+    public Circle getGraphicCircle() {
+        return graphicCircle;
     }
 
-    public World getWorld() {
-        return world;
-    }
+    public void eventMouseHandler() {
+        graphicCircle.setOnMousePressed(event -> {
+            isDragging = true;
+            gravityScale = 0.0;
+            body.setGravityScale(gravityScale); // rimuovo la gravità della palla quando voglio draggarla
+        });
 
-    public void setWorld(World world) {
-        this.world = world;
-    }
+        graphicCircle.setOnMouseDragged(event -> {
+            if (isDragging) {
+                gravityScale = 0.0; // lo rimetto tanto per essere sicuro
+                body.setGravityScale(gravityScale);
+                double mouseX = event.getSceneX();
+                double mouseY = event.getSceneY();
 
-    public void setVelocity(Point2D velocity) {
-        this.velocity = velocity;
-    }
+                // Imposta le nuove coordinate della palla
+                double newCenterX = mouseX;
+                double newCenterY = mouseY;
 
-    public Paint getColor() {
-        return color;
-    }
+                // Aggiorna la posizione della palla
+                graphicCircle.setCenterX(newCenterX);
+                graphicCircle.setCenterY(newCenterY);
 
-    public void setColor(Paint color) {
-        this.color = color;
-        setFill(color);
-    }
+                // Memorizza la nuova posizione del trascinamento come posizione iniziale per il prossimo spostamento
 
-    public Point2D getCenter() {
-        return center;
-    }
+                // Aggiorna la posizione del corpo fisico
+                body.getTransform().setTranslation(graphicCircle.getCenterX(), graphicCircle.getCenterY());
+            }
+        });
 
-    public void setCenter(Point2D center) {
-        this.center = center;
-        setCenterX(center.getX());
-        setCenterY(center.getY());
-    }
-
-    public Circle getCircle() {
-        return circle;
+        graphicCircle.setOnMouseReleased(event -> {
+            /**
+             * quando mollo riattivo gravità
+             */
+            isDragging = false;
+            gravityScale = 1.0;
+            body.setGravityScale(gravityScale);
+        });
     }
 
     public Body getBody() {
         return body;
     }
 
-    public void setBody(Body body) {
-        this.body = body;
+    private Color getRandomColorExceptRed() {
+        double red, green, blue;
+        do {
+            red = Math.random();
+            green = Math.random();
+            blue = Math.random();
+        } while (red > 0.7);
+        return Color.color(red, green, blue);
     }
-
-    public void fallAnimation(double finalY) {
-
-        world.setGravity(new Vector2(0, 9.8)); // set gravity to 9.8 m/s^2
-
-        AnimationTimer animationTimer = new AnimationTimer() {
-            private long lastUpdate = 0;
-
-            @Override
-            public void handle(long now) {
-                if (lastUpdate == 0) {
-                    lastUpdate = now;
-                    return;
-                }
-
-                double elapsedTime = (now - lastUpdate) / 1.5e7;
-
-                world.update(elapsedTime); // update the physics world
-
-                setCenterX(body.getTransform().getTranslationX());
-                setCenterY(body.getTransform().getTranslationY());
-
-                if (body.getTransform().getTranslationY() >= finalY - getRadius()) {
-                    stop();
-                }
-
-                lastUpdate = now;
-            }
-        };
-        animationTimer.start();
-    }
-
-
 }

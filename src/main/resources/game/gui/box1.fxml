@@ -14,11 +14,11 @@
             <buttons>
                 <ButtonBar prefHeight="52.0" prefWidth="202.0">
                     <buttons>
-                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#initializeAddButton" text="+">
+                        <Button fx:id="addButton" onAction="#initilizeAddButton" mnemonicParsing="false"  text="+">
                      <font>
                         <Font size="25.0" />
                      </font></Button>
-                  <ToggleButton fx:id="deleteButton" mnemonicParsing="false" onAction="#initializeDeleteButton" text="-" textAlignment="CENTER" textFill="#f70202" textOverrun="CENTER_ELLIPSIS">
+                  <ToggleButton fx:id="deleteButton" onAction="#initializeDeleteButton" mnemonicParsing="false"  text="-" textAlignment="CENTER" textFill="#f70202" textOverrun="CENTER_ELLIPSIS">
                      <font>
                         <Font size="25.0" />
                      </font>
