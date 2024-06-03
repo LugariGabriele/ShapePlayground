@@ -4,9 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="aggiunto fisica :)">
+    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="Fixato problema compenetrazione allo spawn &#10;e messo pavimento come ostacolo fisico">
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/tool/Container.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/tool/Triangle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/game/gui/Game.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/game/gui/controller/PopUp.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/game/gui/controller/PopUp.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/game/gui/controller/info_logo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/game/gui/icon.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/GameApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/logic/LogicGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/tool/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tool/Platform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/game/gui/box1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/game/gui/Playground.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +30,10 @@
       <list>
         <option value="JavaFXApplication" />
         <option value="module-info" />
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="Interface" />
+        <option value="CSS File" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -73,6 +87,7 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/cri/IdeaProjects/BallsBox/src/main/java/game&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -96,12 +111,17 @@
       <recent name="C:\Users\cri\IdeaProjects\toy_box\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\cri\IdeaProjects\BallsBox\src\main\resources\game\gui\controller" />
+      <recent name="C:\Users\cri\IdeaProjects\BallsBox\src\main\resources\game\gui" />
       <recent name="C:\Users\cri\IdeaProjects\toy_box\src\main\resources\game\gui" />
       <recent name="C:\Users\cri\IdeaProjects\toy_box\src\main\java\game\gui" />
       <recent name="C:\Users\cri\IdeaProjects\toy_box\src\main\java\game" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="game.tool" />
     </key>
   </component>
   <component name="RunManager" selected="Application.game.gui.GameApplication">
@@ -119,11 +139,11 @@
       </method>
     </configuration>
     <configuration name="GameController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="game.gui.GameController" />
+      <option name="MAIN_CLASS_NAME" value="game.gui.controller.GameController" />
       <module name="ToyBox" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="game.gui.*" />
+          <option name="PATTERN" value="game.gui.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -149,7 +169,7 @@
       <module name="ToyBox" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="game.gui.*" />
+          <option name="PATTERN" value="game.gui.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -208,6 +228,26 @@
       <workItem from="1717256029763" duration="5264000" />
       <workItem from="1717331017892" duration="9363000" />
       <workItem from="1717405260376" duration="5406000" />
+      <workItem from="1717415083592" duration="232000" />
+      <workItem from="1717421424704" duration="10999000" />
+      <workItem from="1717443310878" duration="2370000" />
+      <workItem from="1717458426344" duration="3635000" />
+      <workItem from="1717509758568" duration="3746000" />
+      <workItem from="1717513559667" duration="101000" />
+      <workItem from="1717523030566" duration="7315000" />
+      <workItem from="1717580413861" duration="355000" />
+      <workItem from="1717586946113" duration="9996000" />
+      <workItem from="1717599806492" duration="413000" />
+      <workItem from="1717669727221" duration="4908000" />
+      <workItem from="1717675459537" duration="879000" />
+      <workItem from="1717684372580" duration="796000" />
+      <workItem from="1717767628548" duration="866000" />
+      <workItem from="1717769178079" duration="10000" />
+      <workItem from="1718115507842" duration="15000" />
+      <workItem from="1718182590669" duration="4094000" />
+      <workItem from="1718202305283" duration="12000" />
+      <workItem from="1718206823531" duration="3237000" />
+      <workItem from="1718210326867" duration="66000" />
     </task>
     <task id="LOCAL-00001" summary="created project">
       <option name="closed" value="true" />
@@ -353,7 +393,23 @@
       <option name="project" value="LOCAL" />
       <updated>1717340336272</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Fixato problema compenetrazione allo spawn &#10;e messo pavimento come ostacolo fisico">
+      <option name="closed" value="true" />
+      <created>1717413994608</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1717413994608</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Fixato problema compenetrazione allo spawn &#10;e messo pavimento come ostacolo fisico">
+      <option name="closed" value="true" />
+      <created>1717415130015</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1717415130015</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -389,7 +445,8 @@
     <MESSAGE value="aggiunto tentativo collisione tavolo in Dragmouse&#10;però va strano" />
     <MESSAGE value="aggiunto classe Body a ball e modificato LogicGame però quando runnato da errore" />
     <MESSAGE value="aggiunto fisica :)" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiunto fisica :)" />
+    <MESSAGE value="Fixato problema compenetrazione allo spawn &#10;e messo pavimento come ostacolo fisico" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixato problema compenetrazione allo spawn &#10;e messo pavimento come ostacolo fisico" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

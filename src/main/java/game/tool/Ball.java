@@ -1,5 +1,6 @@
 package game.tool;
 
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -10,44 +11,45 @@ import org.dyn4j.geometry.Rotation;
 
 
 public class Ball {
-    private Circle graphicCircle;
-    private Body body;
-    private BodyFixture fixture;
-    private org.dyn4j.geometry.Circle shape;
-    private Line radiusLine;
-    private boolean isDragging = false; // Flag per indicare se la palla è trascinata
-    private double gravityScale = 1.0; // è una scala che va da 0.0 a 1.0 e serve per dare la forza con cui è affetta da gravità
+    private final Circle graphicCircle;
+    private final Body body;
+    private final BodyFixture fixture;
+    private final Line radiusLine;
+    private boolean isDragging = false;
+    private double gravityScale = 1.0;
+
+
 
     public Ball(double radius, double centerX, double centerY) {
-        /**
-         * parte grafica
-         */
+
+        //create a graphic body
         graphicCircle = new Circle(radius, getRandomColorExceptRed());
-        graphicCircle.setStroke(Color.BLACK); // bordi
-        radiusLine = new Line(); // linea grafica per vedere se la ball ruotano
+        graphicCircle.setStroke(Color.BLACK);
+        radiusLine = new Line();
         radiusLine.setStroke(Color.BLACK);
         radiusLine.setStrokeWidth(1);
-        /**
-         * parte fisica
-         */
+
+        //create a psychic body
         body = new Body();
-        shape = new org.dyn4j.geometry.Circle(radius);
+        org.dyn4j.geometry.Circle shape = new org.dyn4j.geometry.Circle(radius);
         fixture = new BodyFixture(shape);
-        /**
-         * propietà della ball (a sentimento)
-         */
-        fixture.setDensity(1.0);    // su uno è in modo che palla piena( serve per gravità e urti) se più basso palla non piena
-        fixture.setFriction(0.5); // coeff attrito(più alto è più scorre male tra oggetti)
-        fixture.setRestitution(0.5); // se alto ball fanno mega rimbalzi su altri oggetti
+
+        //psychical properties
+        fixture.setDensity(1.0);
+        fixture.setFriction(0.5);
+        fixture.setRestitution(0.5);
         body.addFixture(fixture);
         body.setMass(MassType.NORMAL);
-        body.translate(centerX, centerY); // posizione iniziale corpo fisico
+        body.translate(centerX, centerY);
 
-
-        // Aggiungi gestori degli eventi del mouse per il trascinamento della palla
         eventMouseHandler();
         updateRadiusLine();
     }
+
+    public BodyFixture getFixture() {
+        return fixture;
+    }
+
 
     public Circle getGraphicCircle() {
         return graphicCircle;
@@ -57,36 +59,31 @@ public class Ball {
         graphicCircle.setOnMousePressed(event -> {
             isDragging = true;
             gravityScale = 0.0;
-            body.setGravityScale(gravityScale); // rimuovo la gravità della palla quando voglio draggarla
+            body.setGravityScale(gravityScale);
+            body.setLinearVelocity(0,0);
+            body.rotate(0);
+
         });
 
         graphicCircle.setOnMouseDragged(event -> {
             if (isDragging) {
-                gravityScale = 0.0; // lo rimetto tanto per essere sicuro
+                gravityScale = 0.0;
                 body.setGravityScale(gravityScale);
                 double mouseX = event.getSceneX();
                 double mouseY = event.getSceneY();
 
-                // Imposta le nuove coordinate della palla
                 double newCenterX = mouseX;
                 double newCenterY = mouseY;
 
-                // Aggiorna la posizione della palla
                 graphicCircle.setCenterX(newCenterX);
                 graphicCircle.setCenterY(newCenterY);
 
-                // Memorizza la nuova posizione del trascinamento come posizione iniziale per il prossimo spostamento
-
-                // Aggiorna la posizione del corpo fisico
-                body.getTransform().setTranslation(graphicCircle.getCenterX(), graphicCircle.getCenterY());
+                body.getTransform().setTranslation(graphicCircle.getCenterX(),graphicCircle.getCenterY());
                 updateRadiusLine();
             }
         });
 
         graphicCircle.setOnMouseReleased(event -> {
-            /**
-             * quando mollo riattivo gravità
-             */
             isDragging = false;
             gravityScale = 1.0;
             body.setGravityScale(gravityScale);
@@ -97,6 +94,11 @@ public class Ball {
         return body;
     }
 
+
+    /**
+     * a method that create a random color until the condition is false
+     * @return a random color
+     */
     private Color getRandomColorExceptRed() {
         double red, green, blue;
         do {
@@ -112,22 +114,19 @@ public class Ball {
     }
 
     /**
-     * aggiorna linea del raggio
+     * update the radius line in base of the rotation of the body
      */
     public void updateRadiusLine() {
         double radius = graphicCircle.getRadius();
-        double angle = body.getTransform().getRotation().toRadians(); // Ottieni l'angolo in radianti
+        double angle = body.getTransform().getRotation().toRadians();
 
-        double endX = graphicCircle.getCenterX() + radius * Math.cos(angle); // dovrebbe far muovere la linea
+        double endX = graphicCircle.getCenterX() + radius * Math.cos(angle);
         double endY = graphicCircle.getCenterY() + radius * Math.sin(angle);
 
         radiusLine.setStartX(graphicCircle.getCenterX());
         radiusLine.setStartY(graphicCircle.getCenterY());
         radiusLine.setEndX(endX);
         radiusLine.setEndY(endY);
+
     }
-
-
-
-
 }

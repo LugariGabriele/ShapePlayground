@@ -1,0 +1,33 @@
+#popUpButton{
+    -fx-background-color: #007FFF;
+    -fx-font-size: 15px;
+    -fx-alignment: center;
+    -fx-content-display: center;
+    -fx-padding: 5px;
+    -fx-font-style: italic;
+    -fx-background-radius: 50%;
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+    -fx-max-width: 30px;
+    -fx-max-height: 30px;
+}
+#addButton{
+    -fx-border-color: GREEN;
+    -fx-border-width: 2px;
+    -fx-border-radius: 0px;
+    -fx-padding: 5px;
+    -fx-alignment: center;
+    -fx-content-display: center;
+    -fx-font-style: italic;
+}
+#deleteButton{
+    -fx-border-color: RED;
+    -fx-border-width: 2px;
+    -fx-border-radius: 0px;
+    -fx-padding: 5px;
+    -fx-alignment: center;
+    -fx-content-display: center;
+    -fx-font-style: italic;
+}
+
+

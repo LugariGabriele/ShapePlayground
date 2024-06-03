@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:id="Vbox">
+   <children>
+      <Label fx:id="commandsLabel" text="COMMANDS" />
+      <Label fx:id="upLabel" text="press ↑ key for create a Box" />
+      <Label fx:id="downLabel" text="press ↓ key for create a Bouncing platform" />
+      <Label fx:id="rightLabel" text="press → key for create a slide on the rigth side" />
+      <Label fx:id="leftLabel" text="press ← key for create a slide on the left side" />
+      <Label fx:id="rotateRightLabel" text="press D key for rotate the box of 45° on the right" />
+      <Label fx:id="rotateLeftLabel" text="press A key for rotate the box of 45° on the left" />
+   </children>
+</VBox>

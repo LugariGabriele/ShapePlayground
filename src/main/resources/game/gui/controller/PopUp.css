@@ -1,0 +1,9 @@
+#commandsLabel{
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+
+}
+#downLabel,#leftLabel,#rotateRightLabel,#rotateLeftLabel,#rightLabel,#upLabel{
+    -fx-font-size: 15px ;
+}
