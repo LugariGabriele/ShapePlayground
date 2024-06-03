@@ -2,13 +2,18 @@ package game.gui;
 
 
 import game.tool.Ball;
+import game.tool.Box;
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.util.Duration;
+import org.dyn4j.geometry.MassType;
 import org.dyn4j.geometry.Vector2;
 import org.dyn4j.world.World;
 
@@ -23,12 +28,15 @@ public class GameController {
     private AnchorPane anchorPane;
     private Ball ball;
     @FXML
+    private Box table;
+    @FXML
     private Button addButton;
     @FXML
     private ToggleButton deleteButton;
     @FXML
     private boolean deleteButtonOn = false;
     private List<Ball> balls = new ArrayList<>();
+    private Boolean canSpawnBall = true;
 
     @FXML
     public void initialize() {
@@ -41,17 +49,39 @@ public class GameController {
             }
         };
         timer.start();
+        initializeTable();
+    }
+
+    @FXML
+    private void initializeTable() {
+        table = new Box(0, 470, 150, 30);
+        world.addBody(table.getBody());
+        table.getGraphicRectangle().setFill(Paint.valueOf("#964b00")); // colore tavolo
+        table.getGraphicRectangle().setStroke(Color.BLACK); // colore bordi
+        table.getBody().setMass(MassType.INFINITE); // non si muove;
+        anchorPane.getChildren().add(table.getGraphicRectangle());
     }
 
     @FXML
     private void initilizeAddButton() {
-
         addButton.setOnMouseClicked(event -> {
-            if (!deleteButtonOn) {
+            if (!deleteButtonOn && canSpawnBall) {
                 ball = new Ball(20, 400, 100);
                 world.addBody(ball.getBody());
                 balls.add(ball);
-                anchorPane.getChildren().add(ball.getGraphicCircle());
+                anchorPane.getChildren().addAll(ball.getGraphicCircle(), ball.getRadiusLine());
+                /**
+                 * timer per non far spawnare la ball entro 0.8 sec l'una dall' altra( così non abbiamo problema che appena nate sovrappongono)
+                 */
+                canSpawnBall = false;
+                Timeline timeline = new Timeline(
+                        new KeyFrame(Duration.seconds(0.8), e -> {
+                            canSpawnBall = true; // Dopo 0.5 secondi, riabilita la generazione di palle
+                        })
+                );
+                timeline.setCycleCount(1); // Esegui il timer una volta sola dato che viene genearto ogni ball spawnata
+                timeline.play(); // Avvia il timer
+
             }
         });
     }
@@ -81,7 +111,7 @@ public class GameController {
             ball.getGraphicCircle().setOnMouseExited(mouseEvent -> ball.getGraphicCircle().setFill(originalColor)); // se esce torna colore normale
             ball.getGraphicCircle().setOnMouseClicked(mouseEvent -> {
                 world.removeBody(ball.getBody()); // rimuovo dal mondo della simulazione fisica
-                anchorPane.getChildren().remove(ball.getGraphicCircle()); // cancella dalla scena
+                anchorPane.getChildren().removeAll(ball.getGraphicCircle(), ball.getRadiusLine()); // cancella dalla scena
                 balls.remove(ball); // rimuove dall' elenco
             });
         }
@@ -128,12 +158,12 @@ public class GameController {
                 ball.getBody().setAngularVelocity(0); // ferma rotazione
                 ball.getGraphicCircle().setCenterX(newX); // setto posizione grafica nuove
                 ball.getGraphicCircle().setCenterY(newY);
-                ball.getBody().getTransform().setTranslation(new Vector2(newX, newY)); // setto anche nuove per mondo fisico
+                ball.getBody().getTransform().setTranslation(new Vector2(newX, newY));// setto anche nuove per mondo fisico
+                ball.updateRadiusLine();
                 continue; // serve perchè quando arrivavano in fondo quando spawnate collidevano ma piano piano dopo
                 // compenetravano il pavimento
             }
-
-            // se ball non tocca bordo......
+            ball.updateRadiusLine();             // se ball non tocca bordo......
         }
     }
 }
