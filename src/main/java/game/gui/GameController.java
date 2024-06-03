@@ -73,6 +73,7 @@ public class GameController {
                 /**
                  * timer per non far spawnare la ball entro 0.8 sec l'una dall' altra( così non abbiamo problema che appena nate sovrappongono)
                  */
+
                 canSpawnBall = false;
                 Timeline timeline = new Timeline(
                         new KeyFrame(Duration.seconds(0.8), e -> {
