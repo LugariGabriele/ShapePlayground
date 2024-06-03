@@ -64,7 +64,7 @@ public class GameController {
         double anchorPaneWidth = anchorPane.getPrefWidth();
         double anchorPaneHeight = anchorPane.getPrefHeight();
 
-// Creo un corpo statico per rappresentare il bordo inferiore dell'AnchorPane
+        // Creo un corpo statico per rappresentare il bordo inferiore dell'AnchorPane
         Body anchorPaneBorder = new Body();
         anchorPaneBorder.addFixture(Geometry.createRectangle(anchorPaneWidth, 1)); // Larghezza = alla larghezza dell'AnchorPane
         anchorPaneBorder.setMass(MassType.INFINITE); // Il corpo è statico
@@ -110,7 +110,6 @@ public class GameController {
 
     @FXML
     private void initializeDeleteButton() {
-
         deleteButton.setOnMouseClicked(actionEvent -> {
 
             if (deleteButton.isSelected()) {
