@@ -13,6 +13,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
+import org.dyn4j.dynamics.Body;
+import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;
 import org.dyn4j.geometry.Vector2;
 import org.dyn4j.world.World;
@@ -50,6 +52,25 @@ public class GameController {
         };
         timer.start();
         initializeTable();
+        initializeAnchorPane();
+    }
+
+    /**
+     * inizializzo il bordo basso dell'anchorPane come Body perfar muovere con la fisica i corpi
+     */
+    @FXML void initializeAnchorPane(){
+        double anchorPaneX = anchorPane.getLayoutX();
+        double anchorPaneY = anchorPane.getLayoutY();
+        double anchorPaneWidth = anchorPane.getPrefWidth();
+        double anchorPaneHeight = anchorPane.getPrefHeight();
+
+// Creo un corpo statico per rappresentare il bordo inferiore dell'AnchorPane
+        Body anchorPaneBorder = new Body();
+        anchorPaneBorder.addFixture(Geometry.createRectangle(anchorPaneWidth, 1)); // Larghezza = alla larghezza dell'AnchorPane
+        anchorPaneBorder.setMass(MassType.INFINITE); // Il corpo è statico
+        anchorPaneBorder.translate(anchorPaneX, anchorPaneY + anchorPaneHeight); // Posizionare il corpo alla base dell'AnchorPane
+
+        world.addBody(anchorPaneBorder);
     }
 
     @FXML
@@ -155,8 +176,6 @@ public class GameController {
             double newY = Math.min(Math.max(radius, position.y), anchorPaneHeight - radius);
 
             if (newX != position.x || newY != position.y) { // controlla se tocca bordo
-                ball.getBody().setLinearVelocity(0, 0); // ferma la palla azzerando velocità
-                ball.getBody().setAngularVelocity(0); // ferma rotazione
                 ball.getGraphicCircle().setCenterX(newX); // setto posizione grafica nuove
                 ball.getGraphicCircle().setCenterY(newY);
                 ball.getBody().getTransform().setTranslation(new Vector2(newX, newY));// setto anche nuove per mondo fisico

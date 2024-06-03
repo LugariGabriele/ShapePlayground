@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="aggiunto fisica :)">
-      <change afterPath="$PROJECT_DIR$/src/main/java/game/tool/Box.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/game/gui/box1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/game/gui/box1.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +30,7 @@
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
