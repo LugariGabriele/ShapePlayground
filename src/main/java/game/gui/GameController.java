@@ -155,8 +155,7 @@ public class GameController {
             double newY = Math.min(Math.max(radius, position.y), anchorPaneHeight - radius);
 
             if (newX != position.x || newY != position.y) { // controlla se tocca bordo
-                ball.getBody().setLinearVelocity(0, 0); // ferma la palla azzerando velocità
-                ball.getBody().setAngularVelocity(0); // ferma rotazione
+
                 ball.getGraphicCircle().setCenterX(newX); // setto posizione grafica nuove
                 ball.getGraphicCircle().setCenterY(newY);
                 ball.getBody().getTransform().setTranslation(new Vector2(newX, newY));// setto anche nuove per mondo fisico
