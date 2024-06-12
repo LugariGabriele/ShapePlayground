@@ -5,7 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="Fixato problema compenetrazione allo spawn &#10;e messo pavimento come ostacolo fisico">
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/Camera.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/FXRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/SimulationBody.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/SimulationFrame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/input/AbstractInputHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/input/AbstractKeyboardInputHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/input/AbstractMouseInputHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/input/BooleanStateKeyboardInputHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/input/BooleanStateMouseInputHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/input/CodeExporter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/input/ExportCodeKeyboardInputHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/input/InputHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/input/Key.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/input/MousePanningInputHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/input/MousePickingInputHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/input/MouseZoomInputHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/framework/input/ToggleStateKeyboardInputHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/GameApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/logic/LogicGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,42 +76,45 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2gEGuSkSXxs9SKEUIq552Elt3tt" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.GameApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GameController.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.game.gui.GameApplication.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/cri/IdeaProjects/BallsBox/src/main/java/game&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.GameApplication.executor": "Run",
+    "Application.GameController.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.game.gui.GameApplication.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/dieci/IdeaProjects/BallsBox/src/main/java/game",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;PLAIN_TEXT&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "PLAIN_TEXT"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\dieci\IdeaProjects\BallsBox\src\main\java\game" />
       <recent name="C:\Users\cri\IdeaProjects\BallsBox\src\main\java\game" />
       <recent name="C:\Users\cri\IdeaProjects\toy_box\src\main\resources" />
     </key>
@@ -100,6 +124,7 @@
       <recent name="C:\Users\cri\IdeaProjects\toy_box\src\main\java\game" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="game.framework" />
       <recent name="" />
     </key>
   </component>
@@ -159,9 +184,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.game.gui.GameApplication" />
-        <item itemvalue="Application.GameController" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.GameApplication" />
+        <item itemvalue="Application.GameController" />
       </list>
     </recent_temporary>
   </component>
@@ -207,6 +232,8 @@
       <workItem from="1717256029763" duration="5264000" />
       <workItem from="1717331017892" duration="9363000" />
       <workItem from="1717405260376" duration="5406000" />
+      <workItem from="1717507897365" duration="24740000" />
+      <workItem from="1717605914686" duration="17954000" />
     </task>
     <task id="LOCAL-00001" summary="created project">
       <option name="closed" value="true" />

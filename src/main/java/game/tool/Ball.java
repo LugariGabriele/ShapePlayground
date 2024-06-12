@@ -1,5 +1,7 @@
 package game.tool;
 
+import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -15,6 +17,7 @@ public class Ball {
     private BodyFixture fixture;
     private org.dyn4j.geometry.Circle shape;
     private Line radiusLine;
+    private Object UserData;
     private boolean isDragging = false; // Flag per indicare se la palla è trascinata
     private double gravityScale = 1.0; // è una scala che va da 0.0 a 1.0 e serve per dare la forza con cui è affetta da gravità
 
@@ -120,14 +123,16 @@ public class Ball {
 
         double endX = graphicCircle.getCenterX() + radius * Math.cos(angle); // dovrebbe far muovere la linea
         double endY = graphicCircle.getCenterY() + radius * Math.sin(angle);
+        if (this.graphicCircle.getCenterX() < 800 - this.graphicCircle.getRadius() && this.graphicCircle.getCenterX() - this.graphicCircle.getRadius() > 0) {
+            radiusLine.setStartX(graphicCircle.getCenterX());
+            radiusLine.setStartY(graphicCircle.getCenterY());
+            radiusLine.setEndX(endX);
+            radiusLine.setEndY(endY);
+        }
+        else {
 
-        radiusLine.setStartX(graphicCircle.getCenterX());
-        radiusLine.setStartY(graphicCircle.getCenterY());
-        radiusLine.setEndX(endX);
-        radiusLine.setEndY(endY);
+        }
     }
-
-
 
 
 }
