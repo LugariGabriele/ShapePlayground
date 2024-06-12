@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="Fixato problema compenetrazione allo spawn &#10;e messo pavimento come ostacolo fisico">
-      <change afterPath="$PROJECT_DIR$/src/main/java/game/tool/Container.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/game/tool/Triangle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/game/gui/Game.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/game/gui/controller/PopUp.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/game/gui/controller/PopUp.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/game/gui/controller/info_logo.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/game/gui/icon.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/GameApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/logic/LogicGame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/tool/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tool/Platform.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/game/gui/box1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/game/gui/Playground.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="versione 5.0" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -247,7 +232,7 @@
       <workItem from="1718182590669" duration="4094000" />
       <workItem from="1718202305283" duration="12000" />
       <workItem from="1718206823531" duration="3237000" />
-      <workItem from="1718210326867" duration="66000" />
+      <workItem from="1718210326867" duration="448000" />
     </task>
     <task id="LOCAL-00001" summary="created project">
       <option name="closed" value="true" />
@@ -409,7 +394,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717415130015</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="versione 5.0">
+      <option name="closed" value="true" />
+      <created>1718210614169</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1718210614169</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -446,7 +439,8 @@
     <MESSAGE value="aggiunto classe Body a ball e modificato LogicGame però quando runnato da errore" />
     <MESSAGE value="aggiunto fisica :)" />
     <MESSAGE value="Fixato problema compenetrazione allo spawn &#10;e messo pavimento come ostacolo fisico" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixato problema compenetrazione allo spawn &#10;e messo pavimento come ostacolo fisico" />
+    <MESSAGE value="versione 5.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="versione 5.0" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
