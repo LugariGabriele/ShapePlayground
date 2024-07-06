@@ -1,13 +1,12 @@
 package game.tool;
 
-import javafx.geometry.Point2D;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.geometry.MassType;
-import org.dyn4j.geometry.Rotation;
 
 
 public class Ball {
@@ -42,8 +41,9 @@ public class Ball {
         body.setMass(MassType.NORMAL);
         body.translate(centerX, centerY);
 
-        eventMouseHandler();
         updateRadiusLine();
+        eventMouseHandler();
+
     }
 
     public BodyFixture getFixture() {
@@ -55,9 +55,53 @@ public class Ball {
         return graphicCircle;
     }
 
+    public Body getBody() {
+        return body;
+    }
+
+    /**
+     * a method that create a random color until the condition is false
+     *
+     * @return a random color
+     */
+    private Color getRandomColorExceptRed() {
+        double red, green, blue;
+        do {
+            red = Math.random();
+            green = Math.random();
+            blue = Math.random();
+        } while (red > 0.7);
+        return Color.color(red, green, blue);
+    }
+
+    public Line getRadiusLine() {
+        return radiusLine;
+    }
+
+    /**
+     * update the radius line in base of the rotation of the body
+     */
+    public void updateRadiusLine() {
+
+        double radius = graphicCircle.getRadius();
+        double angle = body.getTransform().getRotation().toRadians();
+
+        double endX = graphicCircle.getCenterX() + radius * Math.cos(angle);
+        double endY = graphicCircle.getCenterY() + radius * Math.sin(angle);
+
+        radiusLine.setStartX(graphicCircle.getCenterX());
+        radiusLine.setStartY(graphicCircle.getCenterY());
+        radiusLine.setEndX(endX);
+        radiusLine.setEndY(endY);
+    }
+
+    public void setDragging(boolean dragging) {
+        isDragging = dragging;
+    }
+
     public void eventMouseHandler() {
         graphicCircle.setOnMousePressed(event -> {
-            isDragging = true;
+            setDragging(true);
             gravityScale = 0.0;
             body.setGravityScale(gravityScale);
             body.setLinearVelocity(0,0);
@@ -84,49 +128,9 @@ public class Ball {
         });
 
         graphicCircle.setOnMouseReleased(event -> {
-            isDragging = false;
+            setDragging(false);
             gravityScale = 1.0;
             body.setGravityScale(gravityScale);
         });
-    }
-
-    public Body getBody() {
-        return body;
-    }
-
-
-    /**
-     * a method that create a random color until the condition is false
-     * @return a random color
-     */
-    private Color getRandomColorExceptRed() {
-        double red, green, blue;
-        do {
-            red = Math.random();
-            green = Math.random();
-            blue = Math.random();
-        } while (red > 0.7);
-        return Color.color(red, green, blue);
-    }
-
-    public Line getRadiusLine() {
-        return radiusLine;
-    }
-
-    /**
-     * update the radius line in base of the rotation of the body
-     */
-    public void updateRadiusLine() {
-        double radius = graphicCircle.getRadius();
-        double angle = body.getTransform().getRotation().toRadians();
-
-        double endX = graphicCircle.getCenterX() + radius * Math.cos(angle);
-        double endY = graphicCircle.getCenterY() + radius * Math.sin(angle);
-
-        radiusLine.setStartX(graphicCircle.getCenterX());
-        radiusLine.setStartY(graphicCircle.getCenterY());
-        radiusLine.setEndX(endX);
-        radiusLine.setEndY(endY);
-
     }
 }

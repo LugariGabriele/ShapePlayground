@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="versione 5.0" />
+    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="versione 5.0">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/GameApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/game/gui/Playground.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/game/gui/Playground.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/game/gui/controller/PopUp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/game/gui/controller/PopUp.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -233,6 +240,8 @@
       <workItem from="1718202305283" duration="12000" />
       <workItem from="1718206823531" duration="3237000" />
       <workItem from="1718210326867" duration="448000" />
+      <workItem from="1718354009714" duration="3777000" />
+      <workItem from="1720271889077" duration="6967000" />
     </task>
     <task id="LOCAL-00001" summary="created project">
       <option name="closed" value="true" />

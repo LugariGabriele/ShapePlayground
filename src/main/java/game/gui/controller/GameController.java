@@ -2,10 +2,9 @@ package game.gui.controller;
 
 
 import game.tool.Ball;
-import game.tool.Platform;
 import game.tool.Container;
+import game.tool.Platform;
 import game.tool.Triangle;
-
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -24,8 +23,6 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.geometry.Geometry;
@@ -42,6 +39,8 @@ import java.util.Objects;
 
 public class GameController {
 
+    @FXML
+    Label deleteLabel;
     @FXML
     private Label addLabel;
     private World world;
@@ -100,22 +99,16 @@ public class GameController {
         anchorPaneBorder.addFixture(Geometry.createRectangle(anchorPaneWidth, 1));
         anchorPaneBorder.setMass(MassType.INFINITE);
         anchorPaneBorder.translate(anchorPaneX, anchorPaneY + anchorPaneHeight);
-
         world.addBody(anchorPaneBorder);
     }
 
     /**
      * method to manage the inputs of certain keyboard keys
+     *
      * @param event
      */
     private void handleKeyPress(KeyEvent event) {
         switch (event.getCode()) {
-            case LEFT:
-                toggleLeftSlide();
-                break;
-            case RIGHT:
-                toggleRightSlide();
-                break;
             case DOWN:
                 toggleBouncingSurface();
                 break;
@@ -133,6 +126,12 @@ public class GameController {
                     isContainerRotatingLeft = true;
                     rotateContainer();
                 }
+                break;
+            case LEFT:
+                toggleLeftSlide();
+                break;
+            case RIGHT:
+                toggleRightSlide();
                 break;
 
         }
@@ -161,6 +160,7 @@ public class GameController {
             removeRigthSlide();
         }
     }
+
     public void toggleContainer() {
         if (container == null) {
             initializeContainer();
@@ -173,7 +173,7 @@ public class GameController {
      * create a right triangle on the left side of the anchorPane
      */
     public void initilizeLeftSlide() {
-        leftSlide = new Triangle(0, 200, 220, 250, 0, 250);
+        leftSlide = new Triangle(0, 300, 220, 350, 0, 350);
         leftSlide.getGraphicTriangle().setFill(Color.GOLD);
         leftSlide.getGraphicTriangle().setStroke(Color.BLACK);
         world.addBody(leftSlide.getBody());
@@ -185,7 +185,7 @@ public class GameController {
      * create a right triangle on the left side of the anchorPane
      */
     public void initilizeRigthSlide() {
-        rightSlide = new Triangle(580, 250, 800, 200, 800, 250);
+        rightSlide = new Triangle(580, 350, 800, 300, 800, 350);
         rightSlide.getGraphicTriangle().setFill(Color.GOLD);
         rightSlide.getGraphicTriangle().setStroke(Color.BLACK);
         world.addBody(rightSlide.getBody());
@@ -228,7 +228,9 @@ public class GameController {
     private void initilizeAddButton() {
         addButton.setOnMouseClicked(event -> {
             if (!deleteButtonOn && canSpawnBall) {
-                ball = new Ball(20, 400, 100);
+                double spawnX = 400;
+                double spawnY = 100;
+                ball = new Ball(20, spawnX, spawnY);
                 world.addBody(ball.getBody());
                 balls.add(ball);
                 anchorPane.getChildren().addAll(ball.getGraphicCircle(), ball.getRadiusLine());
@@ -383,8 +385,8 @@ public class GameController {
      * update the world and his bodies position
      */
     private void update() {
-        world.update(1.0 / 60); //update the world 60 times per second
-         for (Ball ball : balls) {
+        world.update(1.0 / 80); //update the world 60 times per second
+        for (Ball ball : balls) {
             Vector2 position = ball.getBody().getTransform().getTranslation();
 
             ball.getGraphicCircle().setCenterX(position.x);
@@ -406,28 +408,46 @@ public class GameController {
             }
 
 
+
             //set the force given from the bouncingSurface to make the bodies bounce
-             if (bouncingSurface != null) {
-                double bouncingSurfaceTop = bouncingSurface.getGraphicRectangle().getY();
-                double bouncingSurfaceLeft = bouncingSurface.getGraphicRectangle().getX();
-                double elasticSurfaceRight = bouncingSurface.getGraphicRectangle().getX() + bouncingSurface.getGraphicRectangle().getWidth();
-
-                double ballBottom = position.y + radius + ball.getGraphicCircle().getStrokeWidth();
-
-                if (ballBottom >= bouncingSurfaceTop &&
-                        position.x >= bouncingSurfaceLeft && position.x <= elasticSurfaceRight) {
-                    ball.getFixture().setRestitution(1);
-                    Vector2 impulse = new Vector2(0, -1000e20);
-                    ball.getBody().applyForce(impulse);
-
-                }
-
+            if (bouncingSurface != null) {
+                handleBounceOnSurface(ball);
             }
-            rotateContainer();
 
+            rotateContainer();
             ball.getFixture().setRestitution(0.5);
             ball.updateRadiusLine();
+        }
 
+    }
+
+    /**
+     * create the impulse given to the ball by the bouncing surface
+     */
+    private void handleBounceOnSurface(Ball ball) {
+        double bouncingSurfaceTop = bouncingSurface.getGraphicRectangle().getY();
+        double bouncingSurfaceLeft = bouncingSurface.getGraphicRectangle().getX();
+        double elasticSurfaceRight = bouncingSurface.getGraphicRectangle().getX() + bouncingSurface.getGraphicRectangle().getWidth();
+
+        double ballX = ball.getGraphicCircle().getCenterX();
+
+        double ballBottom = ball.getGraphicCircle().getCenterY() + ball.getGraphicCircle().getRadius() + ball.getGraphicCircle().getStrokeWidth();
+
+        if (ballBottom >= bouncingSurfaceTop &&
+                ballX >= bouncingSurfaceLeft && ballX <= elasticSurfaceRight) {
+            
+            Vector2 velocity = ball.getBody().getLinearVelocity();
+
+            Vector2 normal = new Vector2(0, -1); //normal of the horizontal bouncing surface
+
+            double velocityAlongNormal = velocity.dot(normal);
+
+            //set the new velocity of the ball mirroring the direction before bounce
+            Vector2 velocityReflectedAlongNormal = normal.multiply(-3 * velocityAlongNormal);
+
+            Vector2 reflectedVelocity = velocity.add(velocityReflectedAlongNormal);
+
+            ball.getBody().setLinearVelocity(reflectedVelocity);
 
         }
     }
@@ -438,11 +458,11 @@ public class GameController {
     private void rotateContainer() {
 
         if (isContainerRotatingRigth) {
-            container.applyRotation(45, Duration.seconds(5));
+            container.applyRotation(45, Duration.seconds(4.5));
             isContainerRotatingRigth = false;
         }
         if (isContainerRotatingLeft) {
-            container.applyRotation(-45, Duration.seconds(5));
+            container.applyRotation(-45, Duration.seconds(4.5));
             isContainerRotatingLeft = false;
 
         }
@@ -461,7 +481,7 @@ public class GameController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            Scene popUpScene = new Scene(rootPopUp, 330, 170);
+            Scene popUpScene = new Scene(rootPopUp, 350, 180);
             popUpScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("PopUp.css")).toExternalForm());
             Stage newStage = new Stage();
             newStage.setTitle("Commands info");
