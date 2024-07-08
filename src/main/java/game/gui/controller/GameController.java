@@ -18,16 +18,14 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.dyn4j.dynamics.Body;
-import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;
-import org.dyn4j.geometry.Rectangle;
 import org.dyn4j.geometry.Vector2;
 import org.dyn4j.world.World;
 
@@ -40,7 +38,7 @@ import java.util.Objects;
 public class GameController {
 
     @FXML
-    Label deleteLabel;
+    Label textDeleteLabel;
     @FXML
     private Label addLabel;
     private World world;
@@ -51,6 +49,8 @@ public class GameController {
     private Button addButton;
     @FXML
     private Label timerLabel;
+    @FXML
+    private VBox Vbox;
     private double timer = 0.8;
     @FXML
     private ToggleButton deleteButton;
@@ -82,9 +82,10 @@ public class GameController {
         };
         timer.start();
         initializeFloor();
-        initializeButtonsBody();
+
         anchorPane.addEventFilter(KeyEvent.KEY_PRESSED, this::handleKeyPress);
     }
+
 
     /**
      * a method that set the bottom border of the anchorPane as a physical body
@@ -95,17 +96,15 @@ public class GameController {
         double anchorPaneWidth = anchorPane.getPrefWidth();
         double anchorPaneHeight = anchorPane.getPrefHeight();
 
-        Body anchorPaneBorder = new Body();
-        anchorPaneBorder.addFixture(Geometry.createRectangle(anchorPaneWidth, 1));
-        anchorPaneBorder.setMass(MassType.INFINITE);
-        anchorPaneBorder.translate(anchorPaneX, anchorPaneY + anchorPaneHeight);
-        world.addBody(anchorPaneBorder);
+        Body anchorPaneFloor = new Body();
+        anchorPaneFloor.addFixture(Geometry.createRectangle(anchorPaneWidth, 1));
+        anchorPaneFloor.setMass(MassType.INFINITE);
+        anchorPaneFloor.translate(anchorPaneX, anchorPaneY + anchorPaneHeight);
+        world.addBody(anchorPaneFloor);
     }
 
     /**
      * method to manage the inputs of certain keyboard keys
-     *
-     * @param event
      */
     private void handleKeyPress(KeyEvent event) {
         switch (event.getCode()) {
@@ -228,12 +227,13 @@ public class GameController {
     private void initilizeAddButton() {
         addButton.setOnMouseClicked(event -> {
             if (!deleteButtonOn && canSpawnBall) {
-                double spawnX = 400;
+                double spawnX = anchorPane.getWidth() / 2;
                 double spawnY = 100;
                 ball = new Ball(20, spawnX, spawnY);
                 world.addBody(ball.getBody());
                 balls.add(ball);
                 anchorPane.getChildren().addAll(ball.getGraphicCircle(), ball.getRadiusLine());
+
                 startTimer();
             }
         });
@@ -306,22 +306,6 @@ public class GameController {
 
             }
         });
-    }
-
-    /**
-     * create a bodies around the buttons to make the dynamic bodies bang on them
-     */
-    private void initializeButtonsBody() {
-        Body buttonBody = new Body();
-        Rectangle rectangle = new Rectangle(161, 52);
-        BodyFixture fixture = new BodyFixture(rectangle);
-        fixture.setDensity(1);
-        fixture.setFriction(0.5);
-        fixture.setRestitution(1);
-        buttonBody.addFixture(fixture);
-        buttonBody.setMass(MassType.INFINITE);
-        buttonBody.translate(624, 24);
-
     }
 
     /**
@@ -408,7 +392,6 @@ public class GameController {
             }
 
 
-
             //set the force given from the bouncingSurface to make the bodies bounce
             if (bouncingSurface != null) {
                 handleBounceOnSurface(ball);
@@ -435,7 +418,7 @@ public class GameController {
 
         if (ballBottom >= bouncingSurfaceTop &&
                 ballX >= bouncingSurfaceLeft && ballX <= elasticSurfaceRight) {
-            
+
             Vector2 velocity = ball.getBody().getLinearVelocity();
 
             Vector2 normal = new Vector2(0, -1); //normal of the horizontal bouncing surface
@@ -482,12 +465,10 @@ public class GameController {
                 throw new RuntimeException(e);
             }
             Scene popUpScene = new Scene(rootPopUp, 350, 180);
-            popUpScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("PopUp.css")).toExternalForm());
             Stage newStage = new Stage();
             newStage.setTitle("Commands info");
             newStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("info_logo.jpg"))));
             newStage.setScene(popUpScene);
-            newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.initOwner(anchorPane.getScene().getWindow());
             newStage.show();
         });

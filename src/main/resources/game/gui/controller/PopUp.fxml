@@ -1,14 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>
-<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:id="Vbox">
-    <Label fx:id="commandsLabel" text="COMMANDS"/>
-    <Label fx:id="upLabel" text="press ↑ key for create a box"/>
-    <Label fx:id="downLabel" text="press ↓ key for create a bouncing platform"/>
-    <Label fx:id="rightLabel" text="press → key for create a slide on the right"/>
-    <Label fx:id="leftLabel" text="press ← key for create a slide on the left"/>
-    <Label fx:id="rotateRightLabel" text="press D key for rotate the box of 45° on the right"/>
-    <Label fx:id="rotateLeftLabel" text="press A key for rotate the box of 45° on the left"/>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
+<VBox fx:id="Vbox" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <TextFlow>
+        <Text style="-fx-alignment: center" text="COMMANDS">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+    </TextFlow>
+    <TextFlow>
+        <Text text="press ">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+        <Text fx:id="arrowUp" text="↑">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+        <Text text=" key to create a ">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+        <Text fill="BLUE" text="box">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+    </TextFlow>
+    <TextFlow>
+        <Text text="press ">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+        <Text fx:id="arrowDown" text="↓">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+        <Text text=" key to create a ">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+        <Text fill="GREEN" text="bouncing platform">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+    </TextFlow>
+    <TextFlow>
+        <Text text="press ">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+        <Text style="-fx-font-weight: bold;" text="→">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+        <Text text=" key to create a ">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+        <Text fill="#F39F18" text="slide">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+        <Text text=" on the right">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+    </TextFlow>
+    <TextFlow>
+        <Text text="press ">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+        <Text style="-fx-font-weight: bold;" text="←">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+        <Text text=" key to create a ">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+        <Text fill="#F39F18" text="slide">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+        <Text text=" on the left">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+    </TextFlow>
+    <TextFlow>
+        <Text text="press ">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+        <Text style="-fx-font-weight: bold;" text="D">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+        <Text text=" key to rotate the box 45° to the right">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+    </TextFlow>
+    <TextFlow>
+        <Text text="press ">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+        <Text style="-fx-font-weight: bold;" text="A">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+        <Text text=" key to rotate the box 45° to the left">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+    </TextFlow>
 </VBox>

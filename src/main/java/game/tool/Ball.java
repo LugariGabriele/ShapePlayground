@@ -1,6 +1,6 @@
 package game.tool;
 
-import javafx.scene.input.MouseEvent;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -15,7 +15,7 @@ public class Ball {
     private final BodyFixture fixture;
     private final Line radiusLine;
     private boolean isDragging = false;
-    private double gravityScale = 1.0;
+    private double gravityScale;
 
 
 
@@ -62,7 +62,7 @@ public class Ball {
     /**
      * a method that create a random color until the condition is false
      *
-     * @return a random color
+     * @return a random color that can't be red
      */
     private Color getRandomColorExceptRed() {
         double red, green, blue;
@@ -116,11 +116,8 @@ public class Ball {
                 double mouseX = event.getSceneX();
                 double mouseY = event.getSceneY();
 
-                double newCenterX = mouseX;
-                double newCenterY = mouseY;
-
-                graphicCircle.setCenterX(newCenterX);
-                graphicCircle.setCenterY(newCenterY);
+                graphicCircle.setCenterX(mouseX);
+                graphicCircle.setCenterY(mouseY);
 
                 body.getTransform().setTranslation(graphicCircle.getCenterX(),graphicCircle.getCenterY());
                 updateRadiusLine();

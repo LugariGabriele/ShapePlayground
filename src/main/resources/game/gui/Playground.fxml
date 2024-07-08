@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Circle?>
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@Game.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.gui.controller.GameController">
     <children>
-        <ButtonBar buttonOrder="" layoutX="586.0" layoutY="24.0" prefHeight="40.0" prefWidth="200.0">
+        <ButtonBar layoutX="586.0" layoutY="24.0" prefHeight="40.0" prefWidth="200.0">
             <buttons>
                 <ButtonBar prefHeight="53.0" prefWidth="226.0">
                     <buttons>
@@ -41,7 +41,7 @@
                             </font>
                             <graphic>
                                 <VBox alignment="CENTER" prefHeight="0.0" prefWidth="0.0">
-                                    <Label fx:id="deleteLabel" text="DELETE" textFill="BLACK">
+                                    <Label fx:id="textDeleteLabel" text="DELETE" textFill="BLACK">
                                         <font>
                                             <Font size="15.0" />
                                         </font>

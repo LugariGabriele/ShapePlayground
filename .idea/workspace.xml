@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="versione 5.0">
+    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="aggiunto rimbalzi obliqui su trampolino e aggiustato robe">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/GameApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/controller/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/game/gui/Playground.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/game/gui/Playground.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/game/gui/controller/PopUp.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/game/gui/controller/PopUp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/game/gui/controller/PopUp.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -241,7 +241,8 @@
       <workItem from="1718206823531" duration="3237000" />
       <workItem from="1718210326867" duration="448000" />
       <workItem from="1718354009714" duration="3777000" />
-      <workItem from="1720271889077" duration="6967000" />
+      <workItem from="1720271889077" duration="7807000" />
+      <workItem from="1720444950445" duration="6894000" />
     </task>
     <task id="LOCAL-00001" summary="created project">
       <option name="closed" value="true" />
@@ -411,7 +412,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718210614169</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="aggiunto rimbalzi obliqui su trampolino e aggiustato robe">
+      <option name="closed" value="true" />
+      <created>1720279025124</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1720279025124</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -449,7 +458,9 @@
     <MESSAGE value="aggiunto fisica :)" />
     <MESSAGE value="Fixato problema compenetrazione allo spawn &#10;e messo pavimento come ostacolo fisico" />
     <MESSAGE value="versione 5.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="versione 5.0" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/game/gui/GameApplication.java&#10;#&#9;src/main/java/game/gui/GameController.java&#10;#&#9;src/main/java/game/tool/Ball.java" />
+    <MESSAGE value="aggiunto rimbalzi obliqui su trampolino e aggiustato robe" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiunto rimbalzi obliqui su trampolino e aggiustato robe" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
