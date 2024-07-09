@@ -23,6 +23,9 @@ public class Container {
     private double currentRotation = 0;
 
 
+    /**
+     * a geometric figure made up of 3 rectangles
+     */
     public Container(double x, double y, double width, double height, double wallThickness) {
         // Create graphic bodies
         graphicLeftWall = new Rectangle(x, y, wallThickness, height);

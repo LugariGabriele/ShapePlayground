@@ -25,7 +25,7 @@
          <font>
             <Font size="15.0" />
          </font></Text>
-        <Text fill="BLUE" text="box">
+        <Text fill="#dc6e00" text="box">
          <font>
             <Font size="15.0" />
          </font></Text>
@@ -43,7 +43,7 @@
          <font>
             <Font size="15.0" />
          </font></Text>
-        <Text fill="GREEN" text="bouncing platform">
+        <Text fill="deepskyblue" text="bouncing platform">
          <font>
             <Font size="15.0" />
          </font></Text>
@@ -119,5 +119,23 @@
          <font>
             <Font size="15.0" />
          </font></Text>
+    </TextFlow>
+    <TextFlow>
+        <Text text="press ">
+            <font>
+                <Font size="15.0" />
+            </font></Text>
+        <Text style="-fx-font-weight: bold;" text="S">
+            <font>
+                <Font size="18.0" />
+            </font></Text>
+        <Text text=" key to make the surface of the slide ">
+            <font>
+                <Font size="15.0" />
+            </font></Text>
+        <Text fill="#7e952a" text="sticky">
+            <font>
+                <Font size="15.0" />
+            </font></Text>
     </TextFlow>
 </VBox>

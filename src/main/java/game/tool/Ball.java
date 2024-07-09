@@ -40,7 +40,7 @@ public class Ball {
         body.addFixture(fixture);
         body.setMass(MassType.NORMAL);
         body.translate(centerX, centerY);
-
+        body.setAngularDamping(0.2);
         updateRadiusLine();
         eventMouseHandler();
 

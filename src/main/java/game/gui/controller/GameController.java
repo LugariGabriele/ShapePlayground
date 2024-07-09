@@ -18,7 +18,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
@@ -37,8 +36,7 @@ import java.util.Objects;
 
 public class GameController {
 
-    @FXML
-    Label textDeleteLabel;
+    private final List<Ball> balls = new ArrayList<>();
     @FXML
     private Label addLabel;
     private World world;
@@ -49,8 +47,6 @@ public class GameController {
     private Button addButton;
     @FXML
     private Label timerLabel;
-    @FXML
-    private VBox Vbox;
     private double timer = 0.8;
     @FXML
     private ToggleButton deleteButton;
@@ -63,10 +59,11 @@ public class GameController {
     private Triangle leftSlide;
     private Triangle rightSlide;
     private Container container;
-    private List<Ball> balls = new ArrayList<>();
     private Boolean canSpawnBall = true;
     private boolean isContainerRotatingRigth = false;
     private boolean isContainerRotatingLeft = false;
+    private boolean stickyModeOn = false;
+
 
     /**
      * create a world with all its properties
@@ -126,6 +123,11 @@ public class GameController {
                     rotateContainer();
                 }
                 break;
+            case S:
+                if (leftSlide != null || rightSlide != null) {
+                    stickyMode();
+                }
+                break;
             case LEFT:
                 toggleLeftSlide();
                 break;
@@ -144,22 +146,6 @@ public class GameController {
         }
     }
 
-    public void toggleLeftSlide() {
-        if (leftSlide == null) {
-            initilizeLeftSlide();
-        } else {
-            removeLeftSlide();
-        }
-    }
-
-    public void toggleRightSlide() {
-        if (rightSlide == null) {
-            initilizeRigthSlide();
-        } else {
-            removeRigthSlide();
-        }
-    }
-
     public void toggleContainer() {
         if (container == null) {
             initializeContainer();
@@ -168,11 +154,55 @@ public class GameController {
         }
     }
 
-    /*
-     * create a right triangle on the left side of the anchorPane
+    public void toggleLeftSlide() {
+        if (leftSlide == null) {
+            initializeLeftSlide();
+        } else {
+            removeLeftSlide();
+        }
+    }
+
+    public void toggleRightSlide() {
+        if (rightSlide == null) {
+            initializeRigthSlide();
+        } else {
+            removeRigthSlide();
+        }
+    }
+
+    /**
+     * create a platform that when a dynamic body touch the upper part of it makes the body bounce
      */
-    public void initilizeLeftSlide() {
-        leftSlide = new Triangle(0, 300, 220, 350, 0, 350);
+    private void initializeBouncingSurface() {
+        bouncingSurface = new Platform(275, 495, 250, 5);
+        world.addBody(bouncingSurface.getBody());
+        bouncingSurface.getGraphicRectangle().setFill(Color.DEEPSKYBLUE);
+        bouncingSurface.getGraphicRectangle().setStroke(Color.BLACK);
+        bouncingSurface.getBody().setMass(MassType.INFINITE);
+        bouncingSurface.getFixture().setFriction(1);
+        anchorPane.getChildren().add(bouncingSurface.getGraphicRectangle());
+    }
+
+    /**
+     * create a similar box which dynamic bodies can be stored
+     */
+    private void initializeContainer() {
+        container = new Container(325, 180, 150, 150, 10);
+        container.getGraphicLeftWall().setFill(Color.DARKORANGE);
+        container.getGraphicRightWall().setFill(Color.DARKORANGE);
+        container.getGraphicBottomWall().setFill(Color.DARKORANGE);
+        world.addBody(container.getBottomBody());
+        world.addBody(container.getRightBody());
+        world.addBody(container.getLeftBody());
+
+        anchorPane.getChildren().addAll(container.getContainerGroup());
+    }
+
+    /*
+     * create a triangle on the left side of the anchorPane
+     */
+    public void initializeLeftSlide() {
+        leftSlide = new Triangle(0, 500, 0, 450, 270, 500);
         leftSlide.getGraphicTriangle().setFill(Color.GOLD);
         leftSlide.getGraphicTriangle().setStroke(Color.BLACK);
         world.addBody(leftSlide.getBody());
@@ -181,10 +211,10 @@ public class GameController {
     }
 
     /**
-     * create a right triangle on the left side of the anchorPane
+     * create a triangle on the rigth side of the anchorPane
      */
-    public void initilizeRigthSlide() {
-        rightSlide = new Triangle(580, 350, 800, 300, 800, 350);
+    public void initializeRigthSlide() {
+        rightSlide = new Triangle(530, 500, 800, 450, 800, 500);
         rightSlide.getGraphicTriangle().setFill(Color.GOLD);
         rightSlide.getGraphicTriangle().setStroke(Color.BLACK);
         world.addBody(rightSlide.getBody());
@@ -192,39 +222,49 @@ public class GameController {
         anchorPane.getChildren().add(rightSlide.getGraphicTriangle());
     }
 
-    /**
-     * create a platform that when a dynamic body touch the upper part of it makes the body bounce
-     */
-    private void initializeBouncingSurface() {
-        bouncingSurface = new Platform(275, 490, 250, 10);
-        world.addBody(bouncingSurface.getBody());
-        bouncingSurface.getGraphicRectangle().setFill(Color.GREEN);
-        bouncingSurface.getGraphicRectangle().setStroke(Color.BLACK);
-        bouncingSurface.getBody().setMass(MassType.INFINITE);
-        bouncingSurface.getFixture().setFriction(0.2);
-        anchorPane.getChildren().add(bouncingSurface.getGraphicRectangle());
-    }
+
 
     /**
-     * create a similar box which dynamic bodies can be stored
+     * methods for remove the FX figures and the bodies from the scene
      */
-    private void initializeContainer() {
-        container = new Container(325, 150, 150, 150, 10);
-        container.getGraphicLeftWall().setFill(Color.BLUE);
-        container.getGraphicRightWall().setFill(Color.BLUE);
-        container.getGraphicBottomWall().setFill(Color.BLUE);
-        world.addBody(container.getBottomBody());
-        world.addBody(container.getRightBody());
-        world.addBody(container.getLeftBody());
-
-        anchorPane.getChildren().addAll(container.getContainerGroup());
+    @FXML
+    private void removeBouncingSurface() {
+        world.removeBody(bouncingSurface.getBody());
+        anchorPane.getChildren().remove(bouncingSurface.getGraphicRectangle());
+        bouncingSurface = null;
     }
+
+    @FXML
+    private void removeContainer() {
+        world.removeBody(container.getBottomBody());
+        world.removeBody(container.getLeftBody());
+        world.removeBody(container.getRightBody());
+        anchorPane.getChildren().removeAll(container.getContainerGroup());
+        container = null;
+
+    }
+
+    @FXML
+    private void removeLeftSlide() {
+        world.removeBody(leftSlide.getBody());
+        anchorPane.getChildren().remove(leftSlide.getGraphicTriangle());
+        leftSlide = null;
+    }
+
+    @FXML
+    private void removeRigthSlide() {
+        world.removeBody(rightSlide.getBody());
+        anchorPane.getChildren().remove(rightSlide.getGraphicTriangle());
+        rightSlide = null;
+    }
+
+
 
     /**
      * set the action of the Add button when is clicked
      */
     @FXML
-    private void initilizeAddButton() {
+    private void initializeAddButton() {
         addButton.setOnMouseClicked(event -> {
             if (!deleteButtonOn && canSpawnBall) {
                 double spawnX = anchorPane.getWidth() / 2;
@@ -237,13 +277,6 @@ public class GameController {
                 startTimer();
             }
         });
-    }
-
-    /**
-     * update the FX's timer label
-     */
-    private void updateTimerLabel() {
-        timerLabel.setText(String.format("%.1fs", timer));
     }
 
     /**
@@ -280,6 +313,16 @@ public class GameController {
     }
 
     /**
+     * update the FX's timer label
+     */
+    @FXML
+    private void updateTimerLabel() {
+        timerLabel.setText(String.format("%.1fs", timer));
+    }
+
+
+
+    /**
      * set the action of the Delete button when is clicked
      */
     @FXML
@@ -308,40 +351,6 @@ public class GameController {
         });
     }
 
-    /**
-     * methods for remove the FX figures and the bodies from the scene
-     */
-    @FXML
-    private void removeBouncingSurface() {
-        world.removeBody(bouncingSurface.getBody());
-        anchorPane.getChildren().remove(bouncingSurface.getGraphicRectangle());
-        bouncingSurface = null;
-    }
-
-    @FXML
-    private void removeLeftSlide() {
-        world.removeBody(leftSlide.getBody());
-        anchorPane.getChildren().remove(leftSlide.getGraphicTriangle());
-        leftSlide = null;
-    }
-
-    @FXML
-    private void removeRigthSlide() {
-        world.removeBody(rightSlide.getBody());
-        anchorPane.getChildren().remove(rightSlide.getGraphicTriangle());
-        rightSlide = null;
-    }
-
-    @FXML
-    private void removeContainer() {
-        world.removeBody(container.getBottomBody());
-        world.removeBody(container.getLeftBody());
-        world.removeBody(container.getRightBody());
-        anchorPane.getChildren().removeAll(container.getContainerGroup());
-        container = null;
-
-    }
-
     @FXML
     private void deleteSelectedBall() {
         for (Ball ball : balls) {
@@ -365,11 +374,13 @@ public class GameController {
         }
     }
 
+
+
     /**
      * update the world and his bodies position
      */
     private void update() {
-        world.update(1.0 / 80); //update the world 60 times per second
+        world.update(1.0 / 80); //update the world 80 times per second
         for (Ball ball : balls) {
             Vector2 position = ball.getBody().getTransform().getTranslation();
 
@@ -435,6 +446,8 @@ public class GameController {
         }
     }
 
+
+
     /**
      * make the container's FX and body rotate through an angle of 45°
      */
@@ -451,6 +464,31 @@ public class GameController {
         }
     }
 
+
+
+    /**
+     * make the sides of the slides sticky to other bodies
+     */
+    private void stickyMode() {
+        stickyModeOn = !stickyModeOn;
+
+        double restitutionValue = stickyModeOn ? 0 : 1; // 0 for ON, 1 for OFF
+        Color color = stickyModeOn ? Color.valueOf("BCE954") : Color.GOLD;
+
+        if (leftSlide != null) {
+            leftSlide.getFixture().setRestitution(restitutionValue);
+            leftSlide.getGraphicTriangle().setFill(color);
+        }
+
+        if (rightSlide != null) {
+            rightSlide.getFixture().setRestitution(restitutionValue);
+            rightSlide.getGraphicTriangle().setFill(color);
+        }
+
+    }
+
+
+
     /**
      * initialize the creation of a new scene when the popUpButton is clicked
      */
@@ -464,7 +502,7 @@ public class GameController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            Scene popUpScene = new Scene(rootPopUp, 350, 180);
+            Scene popUpScene = new Scene(rootPopUp, 350, 210);
             Stage newStage = new Stage();
             newStage.setTitle("Commands info");
             newStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("info_logo.jpg"))));

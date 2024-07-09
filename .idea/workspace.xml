@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="aggiunto rimbalzi obliqui su trampolino e aggiustato robe">
+    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="rifatto PopUp e modficato rimbalzi da trampolino">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/controller/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tool/Ball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/tool/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tool/Container.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/tool/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tool/Triangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/game/gui/Playground.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/game/gui/Playground.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/game/gui/controller/PopUp.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/game/gui/controller/PopUp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/game/gui/controller/PopUp.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,6 +52,11 @@
         <option name="url" value="https://github.com/LugariGabriele/BallsBox.git" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="JsbtTreeLayoutManager">
+    <layout place="tools.popupGrunt">
+      <scroll-view-position x="0" y="0" />
+    </layout>
   </component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -242,7 +248,8 @@
       <workItem from="1718210326867" duration="448000" />
       <workItem from="1718354009714" duration="3777000" />
       <workItem from="1720271889077" duration="7807000" />
-      <workItem from="1720444950445" duration="6894000" />
+      <workItem from="1720444950445" duration="6975000" />
+      <workItem from="1720515442461" duration="7475000" />
     </task>
     <task id="LOCAL-00001" summary="created project">
       <option name="closed" value="true" />
@@ -420,7 +427,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720279025124</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="rifatto PopUp e modficato rimbalzi da trampolino">
+      <option name="closed" value="true" />
+      <created>1720451920443</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1720451920443</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -460,7 +475,8 @@
     <MESSAGE value="versione 5.0" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/game/gui/GameApplication.java&#10;#&#9;src/main/java/game/gui/GameController.java&#10;#&#9;src/main/java/game/tool/Ball.java" />
     <MESSAGE value="aggiunto rimbalzi obliqui su trampolino e aggiustato robe" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiunto rimbalzi obliqui su trampolino e aggiustato robe" />
+    <MESSAGE value="rifatto PopUp e modficato rimbalzi da trampolino" />
+    <option name="LAST_COMMIT_MESSAGE" value="rifatto PopUp e modficato rimbalzi da trampolino" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
