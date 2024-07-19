@@ -1,10 +1,10 @@
 package game.gui.controller;
 
 
-import game.tool.Ball;
-import game.tool.Container;
-import game.tool.Platform;
-import game.tool.Triangle;
+import game.Shapes.Ball;
+import game.Shapes.Container;
+import game.Shapes.Platform;
+import game.Shapes.Triangle;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -99,6 +99,7 @@ public class GameController {
         anchorPaneFloor.translate(anchorPaneX, anchorPaneY + anchorPaneHeight);
         world.addBody(anchorPaneFloor);
     }
+
 
     /**
      * method to manage the inputs of certain keyboard keys
@@ -198,7 +199,7 @@ public class GameController {
         anchorPane.getChildren().addAll(container.getContainerGroup());
     }
 
-    /*
+    /**
      * create a triangle on the left side of the anchorPane
      */
     public void initializeLeftSlide() {

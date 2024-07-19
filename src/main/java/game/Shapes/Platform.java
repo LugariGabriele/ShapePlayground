@@ -1,4 +1,4 @@
-package game.tool;
+package game.Shapes;
 
 import javafx.scene.shape.Rectangle;
 import org.dyn4j.dynamics.Body;

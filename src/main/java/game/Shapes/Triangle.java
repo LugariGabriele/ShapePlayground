@@ -1,10 +1,8 @@
-package game.tool;
+package game.Shapes;
 
 import javafx.scene.shape.Polygon;
-import org.dyn4j.collision.Fixture;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
-import org.dyn4j.geometry.MassType;
 import org.dyn4j.geometry.Vector2;
 
 public class Triangle {

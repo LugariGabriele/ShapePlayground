@@ -1,4 +1,4 @@
-package game.tool;
+package game.Shapes;
 
 
 import javafx.scene.paint.Color;
