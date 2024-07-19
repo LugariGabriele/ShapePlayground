@@ -17,15 +17,15 @@ public class Ball {
     private boolean isDragging = false;
     private double gravityScale;
 
-
+    private Color currentColor;
 
     public Ball(double radius, double centerX, double centerY) {
 
         //create a graphic body
-        graphicCircle = new Circle(radius, getRandomColorExceptRed());
-        graphicCircle.setStroke(Color.BLACK);
+        currentColor = getRandomColorExceptRed();
+        graphicCircle = new Circle(radius, currentColor);
         radiusLine = new Line();
-        radiusLine.setStroke(Color.BLACK);
+        colorsIfItsDark();
         radiusLine.setStrokeWidth(1);
 
         //create a psychic body
@@ -74,6 +74,20 @@ public class Ball {
         return Color.color(red, green, blue);
     }
 
+    /**
+     * set the color of the strokes if the Ball's color is dark
+     */
+    private void colorsIfItsDark() {
+        double luminosity = 0.299 * currentColor.getRed() + 0.587 * currentColor.getGreen() + 0.114 * currentColor.getBlue();
+        if (luminosity < 0.25) {
+            radiusLine.setStroke(Color.LIGHTGRAY);
+            graphicCircle.setStroke(Color.LIGHTGRAY);
+        } else {
+            radiusLine.setStroke(Color.BLACK);
+            graphicCircle.setStroke(Color.BLACK);
+        }
+    }
+
     public Line getRadiusLine() {
         return radiusLine;
     }
@@ -93,6 +107,7 @@ public class Ball {
         radiusLine.setStartY(graphicCircle.getCenterY());
         radiusLine.setEndX(endX);
         radiusLine.setEndY(endY);
+
     }
 
     public void setDragging(boolean dragging) {
@@ -104,7 +119,7 @@ public class Ball {
             setDragging(true);
             gravityScale = 0.0;
             body.setGravityScale(gravityScale);
-            body.setLinearVelocity(0,0);
+            body.setLinearVelocity(0, 0);
             body.rotate(0);
 
         });
@@ -119,7 +134,7 @@ public class Ball {
                 graphicCircle.setCenterX(mouseX);
                 graphicCircle.setCenterY(mouseY);
 
-                body.getTransform().setTranslation(graphicCircle.getCenterX(),graphicCircle.getCenterY());
+                body.getTransform().setTranslation(graphicCircle.getCenterX(), graphicCircle.getCenterY());
                 updateRadiusLine();
             }
         });

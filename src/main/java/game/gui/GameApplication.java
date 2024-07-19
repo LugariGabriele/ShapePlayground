@@ -21,7 +21,7 @@ public class GameApplication extends Application {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Playground.fxml")));
         root.setStyle("-fx-background-color: #C6A664;");
         Scene scene = new Scene(root);
-        stage.setTitle("Playground");
+        stage.setTitle("Shapes Playground");
         stage.setResizable(false);
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("icon.jpg"))));
         stage.setScene(scene);
