@@ -6,7 +6,7 @@
 ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJIDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)
 
 ## What's about
-A project that thanks to a phsyscics engine create a place where circles can "play" with other geometric figures
+A project that thanks to a physics engine create a place where circles can "play" with other geometric figures
 
 ![Animazione](https://i.imgur.com/MF9CmsZ.gif)
 
