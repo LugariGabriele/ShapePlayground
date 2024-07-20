@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="change name">
+    <list default="true" id="83bb9c18-f0af-4f15-8f47-33b2acfb2133" name="Changes" comment="version 1.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/Shapes/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/Shapes/Ball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/gui/GameApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/gui/GameApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,7 +253,8 @@
       <workItem from="1721051382990" duration="37000" />
       <workItem from="1721320793717" duration="1324000" />
       <workItem from="1721381994934" duration="441000" />
-      <workItem from="1721385719779" duration="1275000" />
+      <workItem from="1721385719779" duration="2060000" />
+      <workItem from="1721465238148" duration="73000" />
     </task>
     <task id="LOCAL-00001" summary="created project">
       <option name="closed" value="true" />
@@ -457,7 +456,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721382362826</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="version 1.0">
+      <option name="closed" value="true" />
+      <created>1721387926940</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1721387926940</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -475,8 +482,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created project" />
-    <MESSAGE value="create sketch xml and circle started" />
     <MESSAGE value="change box and adjust circle's class" />
     <MESSAGE value="little change and the collision BoxBox" />
     <MESSAGE value="little change and create CollisionManager class" />
@@ -499,8 +504,10 @@
     <MESSAGE value="aggiunto rimbalzi obliqui su trampolino e aggiustato robe" />
     <MESSAGE value="rifatto PopUp e modficato rimbalzi da trampolino" />
     <MESSAGE value="creato Sticky mode e spostato un po' di roba" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/master'" />
     <MESSAGE value="change name" />
-    <option name="LAST_COMMIT_MESSAGE" value="change name" />
+    <MESSAGE value="version 1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 1.0" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
