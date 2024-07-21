@@ -224,18 +224,17 @@ public class GameController {
     }
 
 
-
     /**
      * methods for remove the FX figures and the bodies from the scene
      */
-    @FXML
+
     private void removeBouncingSurface() {
         world.removeBody(bouncingSurface.getBody());
         anchorPane.getChildren().remove(bouncingSurface.getGraphicRectangle());
         bouncingSurface = null;
     }
 
-    @FXML
+
     private void removeContainer() {
         world.removeBody(container.getBottomBody());
         world.removeBody(container.getLeftBody());
@@ -245,20 +244,19 @@ public class GameController {
 
     }
 
-    @FXML
+
     private void removeLeftSlide() {
         world.removeBody(leftSlide.getBody());
         anchorPane.getChildren().remove(leftSlide.getGraphicTriangle());
         leftSlide = null;
     }
 
-    @FXML
+
     private void removeRigthSlide() {
         world.removeBody(rightSlide.getBody());
         anchorPane.getChildren().remove(rightSlide.getGraphicTriangle());
         rightSlide = null;
     }
-
 
 
     /**
@@ -322,7 +320,6 @@ public class GameController {
     }
 
 
-
     /**
      * set the action of the Delete button when is clicked
      */
@@ -352,7 +349,6 @@ public class GameController {
         });
     }
 
-    @FXML
     private void deleteSelectedBall() {
         for (Ball ball : balls) {
             Paint originalColor = ball.getGraphicCircle().getFill();
@@ -366,7 +362,7 @@ public class GameController {
         }
     }
 
-    @FXML
+
     private void disableDeleteSelectedBall() {
         for (Ball ball : balls) {
             ball.getGraphicCircle().setOnMouseEntered(null);
@@ -374,7 +370,6 @@ public class GameController {
             ball.getGraphicCircle().setOnMouseClicked(null);
         }
     }
-
 
 
     /**
@@ -448,7 +443,6 @@ public class GameController {
     }
 
 
-
     /**
      * make the container's FX and body rotate through an angle of 45°
      */
@@ -464,7 +458,6 @@ public class GameController {
 
         }
     }
-
 
 
     /**
@@ -487,7 +480,6 @@ public class GameController {
         }
 
     }
-
 
 
     /**
