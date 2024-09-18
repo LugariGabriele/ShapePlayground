@@ -20,11 +20,7 @@ A project that thanks to a physics engine create a place where circles can "play
 git clone https://github.com/LugariGabriele/ShapePlayground.git
 cd ShapePlayground
 ```
-### Step 2 : Install Dependencies
-```sh
-mvn clean install
- ```
-### Step 3 : Open the project and run GameApplication class
+### Step 2 : Open the project and run GameApplication class
 ```sh
 code . #example for Visual Studio Code (check if your IDE support this feature)
 ```
