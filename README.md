@@ -9,21 +9,10 @@ An university project that thanks to a physics engine create a place where circl
 
 ![Animazione](https://i.imgur.com/MF9CmsZ.gif)
 
-## Requirements
+## Made with
 * Java Development Kit (JDK) version 21+
 * Apache Maven  version 3.8.6+
 
-## How to try it
-### Step 1: clone the repository
-```sh
-git clone https://github.com/LugariGabriele/ShapePlayground.git
-cd ShapePlayground
-```
-### Step 2 : Open the project and run GameApplication class
-```sh
-code . #example for Visual Studio Code (check if your IDE support this feature)
-```
----
 ### link
 * [@LugariGabriele](https://github.com/LugariGabriele)
 * [@DieciMaikol](https://github.com/DieciMaikol)
